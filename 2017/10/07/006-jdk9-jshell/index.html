@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>jdk9-jshell | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简单描述jdk9-jshell初步用法:">
+<meta name="keywords" content="jdk,jdk9,jshell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jdk9-jshell">
+<meta property="og:url" content="http://yoursite.com/2017/10/07/006-jdk9-jshell/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简单描述jdk9-jshell初步用法:">
+<meta property="og:updated_time" content="2018-02-16T14:45:57.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jdk9-jshell">
+<meta name="twitter:description" content="简单描述jdk9-jshell初步用法:">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-006-jdk9-jshell" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/07/006-jdk9-jshell/" class="article-date">
+  <time datetime="2017-10-07T03:32:27.000Z" itemprop="datePublished">2017-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jdk9-jshell
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>简单描述jdk9-jshell初步用法:</p>
+<a id="more"></a>
+<h3 id="启动jshell"><a href="#启动jshell" class="headerlink" title="启动jshell"></a>启动jshell</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sh-3.2# jshell</span><br><span class="line">|  欢迎使用 JShell -- 版本 <span class="number">9</span></span><br><span class="line">|  要大致了解该版本, 请键入: /help intro</span><br><span class="line"></span><br><span class="line">jshell&gt;</span><br></pre></td></tr></table></figure>
+<p>运行 /help intro</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; /help intro</span><br><span class="line">|</span><br><span class="line">|  intro</span><br><span class="line">|</span><br><span class="line">|  使用 jshell 工具可以执行 Java 代码, 从而立即获取结果。</span><br><span class="line">|  您可以输入 Java 定义 (变量, 方法, 类, 等等), 例如:  <span class="keyword">int</span> x = <span class="number">8</span></span><br><span class="line">|  或 Java 表达式, 例如:  x + x</span><br><span class="line">|  或 Java 语句或导入。</span><br><span class="line">|  这些小块的 Java 代码称为 <span class="string">'片段'</span>。</span><br><span class="line">|</span><br><span class="line">|  这些 jshell 命令还可以让您了解和</span><br><span class="line">|  控制您正在执行的操作, 例如:  /list</span><br><span class="line">|</span><br><span class="line">|  有关命令的列表, 请执行: /help</span><br></pre></td></tr></table></figure>
+<p>运行 /help<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">|       列出已声明变量及其值</span><br><span class="line">|  /methods [&lt;名称或 id&gt;|-all|-start]</span><br><span class="line">|       列出已声明方法及其签名</span><br><span class="line">|  /types [&lt;名称或 id&gt;|-all|-start]</span><br><span class="line">|       列出已声明的类型</span><br><span class="line">|  /imports</span><br><span class="line">|       列出导入的项</span><br><span class="line">|  /exit</span><br><span class="line">|       退出 jshell</span><br><span class="line">|  /env [-class-path &lt;路径&gt;] [-module-path &lt;路径&gt;] [-add-modules &lt;模块&gt;] ...</span><br><span class="line">|       查看或更改评估上下文</span><br><span class="line">|  /reset [-class-path &lt;路径&gt;] [-module-path &lt;路径&gt;] [-add-modules &lt;模块&gt;]...</span><br><span class="line">|       重启 jshell</span><br><span class="line">|  /reload [-restore] [-quiet] [-class-path &lt;路径&gt;] [-module-path &lt;路径&gt;]...</span><br><span class="line">|       重置和重放相关历史记录 -- 当前历史记录或上一个历史记录 (-restore)</span><br><span class="line">|  /history</span><br><span class="line">|       您键入的内容的历史记录</span><br><span class="line">|  /help [&lt;command&gt;|&lt;subject&gt;]</span><br><span class="line">|       获取 jshell 的相关信息</span><br><span class="line">|  /set editor|start|feedback|mode|prompt|truncation|format ...</span><br><span class="line">|       设置 jshell 配置信息</span><br><span class="line">|  /? [&lt;command&gt;|&lt;subject&gt;]</span><br><span class="line">|       获取 jshell 的相关信息</span><br><span class="line">|  /!</span><br><span class="line">|       重新运行上一个片段</span><br><span class="line">|  /&lt;id&gt;</span><br><span class="line">|       按 id 重新运行片段</span><br><span class="line">|  /-&lt;n&gt;</span><br><span class="line">|       重新运行前面的第 n 个片段</span><br><span class="line">|</span><br><span class="line">|  有关详细信息, 请键入 <span class="string">'/help'</span>, 后跟</span><br><span class="line">|  命令或主题的名称。</span><br><span class="line">|  例如 <span class="string">'/help /list'</span> 或 <span class="string">'/help intro'</span>。主题:</span><br><span class="line">|</span><br><span class="line">|  intro</span><br><span class="line">|       jshell 工具的简介</span><br><span class="line">|  shortcuts</span><br><span class="line">|       片段和命令输入提示, 信息访问以及</span><br><span class="line">|       自动代码生成的按键说明</span><br><span class="line">|  context</span><br><span class="line">|       /env /reload 和 /reset 的评估上下文选项</span><br></pre></td></tr></table></figure></p>
+<h3 id="进行简单的表达式计算"><a href="#进行简单的表达式计算" class="headerlink" title="进行简单的表达式计算"></a>进行简单的表达式计算</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; 1+1</span><br><span class="line"><span class="variable">$3</span> ==&gt; 2</span><br><span class="line"></span><br><span class="line">jshell&gt; 1*1</span><br><span class="line"><span class="variable">$4</span> ==&gt; 1</span><br><span class="line"></span><br><span class="line">jshell&gt; 1-1</span><br><span class="line"><span class="variable">$5</span> ==&gt; 0</span><br><span class="line"></span><br><span class="line">jshell&gt; 1/1</span><br><span class="line"><span class="variable">$6</span> ==&gt; 1</span><br><span class="line"></span><br><span class="line">jshell&gt; 1+1*2</span><br><span class="line"><span class="variable">$7</span> ==&gt; 3</span><br></pre></td></tr></table></figure>
+<p>如果算数运算/0， 仍然会抛异常</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; 1/0</span><br><span class="line">|  java.lang.ArithmeticException thrown: / by zero</span><br><span class="line">|        at (<span class="comment">#8:1)</span></span><br></pre></td></tr></table></figure>
+<p>尝试变量赋值</p>
+<p>对于单行命令，行尾分号应该不是必须的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; int a = 0;</span><br><span class="line">a ==&gt; 0</span><br><span class="line"></span><br><span class="line">jshell&gt; int a = 0</span><br><span class="line">a ==&gt; 0</span><br><span class="line"></span><br><span class="line">jshell&gt; a</span><br><span class="line">a ==&gt; 0</span><br><span class="line"></span><br><span class="line">jshell&gt; int b = 0</span><br><span class="line">b ==&gt; 0</span><br><span class="line"></span><br><span class="line">jshell&gt; b</span><br><span class="line">b ==&gt; 0</span><br></pre></td></tr></table></figure>
+<p>运行一个循环操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; <span class="keyword">for</span>(int i = 0; i &lt; 3; i++) &#123;</span><br><span class="line">   ...&gt;   System.out.println(i);</span><br><span class="line">   ...&gt; &#125;</span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h3 id="jshell-list命令"><a href="#jshell-list命令" class="headerlink" title="jshell-list命令"></a>jshell-list命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; /<span class="built_in">help</span> list</span><br><span class="line">|</span><br><span class="line">|  /list</span><br><span class="line">|</span><br><span class="line">|  显示前面带有片段 ID 的片段源。</span><br><span class="line">|</span><br><span class="line">|  /list</span><br><span class="line">|       列出您键入的或使用 /open 读取的当前活动的代码片段</span><br><span class="line">|</span><br><span class="line">|  /list -start</span><br><span class="line">|       列出自动评估的启动片段</span><br><span class="line">|</span><br><span class="line">|  /list -all</span><br><span class="line">|       列出所有片段, 包括失败的片段, 覆盖的片段, 删除的片段和启动片段</span><br><span class="line">|</span><br><span class="line">|  /list &lt;名称&gt;</span><br><span class="line">|       列出具有指定名称的片段 (特别是活动片段)</span><br><span class="line">|</span><br><span class="line">|  /list &lt;id&gt;</span><br><span class="line">|       列出具有指定片段 ID 的片段</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; /list</span><br><span class="line"></span><br><span class="line">   1 : int a = 1;</span><br><span class="line">   2 : a = 2</span><br><span class="line">   3 : 2/a</span><br><span class="line">   4 : a = 0</span><br><span class="line">   5 : 2/a</span><br><span class="line"></span><br><span class="line">jshell&gt; /list -start</span><br><span class="line"></span><br><span class="line">  s1 : import java.io.*;</span><br><span class="line">  s2 : import java.math.*;</span><br><span class="line">  s3 : import java.net.*;</span><br><span class="line">  s4 : import java.nio.file.*;</span><br><span class="line">  s5 : import java.util.*;</span><br><span class="line">  s6 : import java.util.concurrent.*;</span><br><span class="line">  s7 : import java.util.function.*;</span><br><span class="line">  s8 : import java.util.prefs.*;</span><br><span class="line">  s9 : import java.util.regex.*;</span><br><span class="line"> s10 : import java.util.stream.*;</span><br><span class="line"></span><br><span class="line">jshell&gt; /list -all</span><br><span class="line"></span><br><span class="line">  s1 : import java.io.*;</span><br><span class="line">  s2 : import java.math.*;</span><br><span class="line">  s3 : import java.net.*;</span><br><span class="line">  s4 : import java.nio.file.*;</span><br><span class="line">  s5 : import java.util.*;</span><br><span class="line">  s6 : import java.util.concurrent.*;</span><br><span class="line">  s7 : import java.util.function.*;</span><br><span class="line">  s8 : import java.util.prefs.*;</span><br><span class="line">  s9 : import java.util.regex.*;</span><br><span class="line"> s10 : import java.util.stream.*;</span><br><span class="line">   1 : int a = 1;</span><br><span class="line">   2 : a = 2</span><br><span class="line">   3 : 2/a</span><br><span class="line">   4 : a = 0</span><br><span class="line">   5 : 2/a</span><br><span class="line"></span><br><span class="line">jshell&gt; /list 3</span><br><span class="line"></span><br><span class="line">   3 : 2/a</span><br></pre></td></tr></table></figure>
+<h3 id="jshell-edit"><a href="#jshell-edit" class="headerlink" title="jshell-edit"></a>jshell-edit</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; /<span class="built_in">help</span> edit</span><br><span class="line">|</span><br><span class="line">|  /edit</span><br><span class="line">|</span><br><span class="line">|  在外部编辑器中编辑源的片段。</span><br><span class="line">|  使用 /<span class="built_in">set</span> editor 可以设置要使用的编辑器。</span><br><span class="line">|  如果尚未设置编辑器, 则将启动一个简单的编辑器。</span><br><span class="line">|</span><br><span class="line">|  /edit &lt;名称&gt;</span><br><span class="line">|       编辑具有指定名称的片段 (特别是活动片段)</span><br><span class="line">|</span><br><span class="line">|  /edit &lt;id&gt;</span><br><span class="line">|       编辑具有指定片段 id 的片段</span><br><span class="line">|</span><br><span class="line">|  /edit</span><br><span class="line">|       编辑您键入或使用 /open 读取的当前活动的代码片段</span><br></pre></td></tr></table></figure>
+<p>edit 实际上并没有修改历史的id2的内容，而是重新根据修改后的b=5的结果插入到/list最后一行.<br>而且这个修改很傻，会额外启动一个gui工具，这样，估计在纯字符环境里，不能使用了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">jshell&gt; /list 2</span><br><span class="line"></span><br><span class="line">   2 : a = 2</span><br><span class="line"></span><br><span class="line">jshell&gt; /edit 2</span><br><span class="line">b ==&gt; 5</span><br><span class="line"></span><br><span class="line">jshell&gt; /list 2</span><br><span class="line"></span><br><span class="line">   2 : a = 2</span><br><span class="line"></span><br><span class="line">jshell&gt; /list 10</span><br><span class="line"></span><br><span class="line">  10 : b = 5;</span><br></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><p>jshell 还有很多高级功能，没有一一尝试。</p>
+<p>不过个人感觉jshell没有自动补全，很多代码都得手写，还不如开个ide，写个unittest，试验语言新特性来得快。</p>
+<h3 id="note"><a href="#note" class="headerlink" title="note:"></a>note:</h3><p>jshell 还不好退出，起码在我的版本里，是被强制kill掉的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/07/006-jdk9-jshell/" data-id="cjdq1v0ui0002hgvr6cloxkmv" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdk/">jdk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jshell/">jshell</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/07/003-bash-快捷键整理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          bash-快捷键整理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/06/007-macos-remove-jdk/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">macos remove jdk</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/16/004-hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/">035-如何引用定义不同类型转换时-会发生什么</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

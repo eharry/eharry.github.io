@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>022-mysql-group-by应用于多个列 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="group by做位分组函数, 简单的用法可以分组给定的列 如下所示, 系统中所有数据为 1234567891011mysql&amp;gt; select * from b;+------+------+| a1   | a2   |+------+------+|    1 |    2 ||    3 |    4 ||    1 |    3 ||    1 |    3 ||    1 |">
+<meta property="og:type" content="article">
+<meta property="og:title" content="022-mysql-group-by应用于多个列">
+<meta property="og:url" content="http://yoursite.com/2017/12/06/022-mysql-group-by应用于多个列/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="group by做位分组函数, 简单的用法可以分组给定的列 如下所示, 系统中所有数据为 1234567891011mysql&amp;gt; select * from b;+------+------+| a1   | a2   |+------+------+|    1 |    2 ||    3 |    4 ||    1 |    3 ||    1 |    3 ||    1 |">
+<meta property="og:updated_time" content="2018-02-16T14:45:57.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="022-mysql-group-by应用于多个列">
+<meta name="twitter:description" content="group by做位分组函数, 简单的用法可以分组给定的列 如下所示, 系统中所有数据为 1234567891011mysql&amp;gt; select * from b;+------+------+| a1   | a2   |+------+------+|    1 |    2 ||    3 |    4 ||    1 |    3 ||    1 |    3 ||    1 |">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-022-mysql-group-by应用于多个列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/06/022-mysql-group-by应用于多个列/" class="article-date">
+  <time datetime="2017-12-06T15:59:08.000Z" itemprop="datePublished">2017-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      022-mysql-group-by应用于多个列
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>group by做位分组函数, 简单的用法可以分组给定的列</p>
+<p>如下所示, 系统中所有数据为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br></pre></td></tr></table></figure>
+<p>如果对a1进行group by操作,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a1 from b group by a1;</span><br><span class="line">+------+</span><br><span class="line">| a1   |</span><br><span class="line">+------+</span><br><span class="line">|    1 |</span><br><span class="line">|    3 |</span><br><span class="line">+------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看出, 只是将a1,两行不同的值被group起来了</p>
+<p>接下来,我们试试,看能否指定查询列和group by不同列</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a1 from b group by a2;</span><br><span class="line">ERROR 1055 (42000): Expression <span class="comment">#1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'test1.b.a1' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by</span></span><br></pre></td></tr></table></figure>
+<p>可以看出,mysql不允许这种方式使用.</p>
+<p>但是如果使用了聚集函数,那么还是允许select列和group by列不相同的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select count(a2) from b group by a1;</span><br><span class="line">+-----------+</span><br><span class="line">| count(a2) |</span><br><span class="line">+-----------+</span><br><span class="line">|         4 |</span><br><span class="line">|         1 |</span><br><span class="line">+-----------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看出,group by仍然按照a1进行分类.</p>
+<p>那么group by是否可以使用到多个列中呢?</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a1,a2 from b group by a1,a2;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看出,按照a1和a2的联合方式进行了group操作.</p>
+<ul>
+<li><p>select *  是否可以用在 group中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b group by a1,a2;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>对于 group by全部列来说,是允许的.</p>
+<p>对于group by部分列来说, 是不允许的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b group by a1;</span><br><span class="line">ERROR 1055 (42000): Expression <span class="comment">#2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'test1.b.a2' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by</span></span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>group by后面是否可以加*</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b group by *;</span><br><span class="line">ERROR 1064 (42000): You have an error <span class="keyword">in</span> your SQL syntax; check the manual that corresponds to your MySQL server version <span class="keyword">for</span> the right syntax to use near <span class="string">'*'</span> at line 1</span><br></pre></td></tr></table></figure>
+<p>答案, 不行</p>
+<p>​</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/06/022-mysql-group-by应用于多个列/" data-id="cjdq1v0v2000yhgvr1eed3tvd" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/07/023-mysql-having-初步使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          023-mysql-having-初步使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/02/021-mysql-distinct只能应用于所有列/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">021-mysql-distinct只能应用于所有列</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/16/004-hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/">035-如何引用定义不同类型转换时-会发生什么</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

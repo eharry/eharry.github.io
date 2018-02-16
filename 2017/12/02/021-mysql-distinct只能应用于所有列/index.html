@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>021-mysql-distinct只能应用于所有列 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="mysql的distinct描述,是用来表示输出只能显示不同的值,相同的值被略去  distinct 究竟是作用于一列,还是多列 distinct 与 limit合用时,当有前面的数据重合时, limit会不会补位呢?">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="021-mysql-distinct只能应用于所有列">
+<meta property="og:url" content="http://yoursite.com/2017/12/02/021-mysql-distinct只能应用于所有列/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="mysql的distinct描述,是用来表示输出只能显示不同的值,相同的值被略去  distinct 究竟是作用于一列,还是多列 distinct 与 limit合用时,当有前面的数据重合时, limit会不会补位呢?">
+<meta property="og:updated_time" content="2018-02-16T14:45:57.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="021-mysql-distinct只能应用于所有列">
+<meta name="twitter:description" content="mysql的distinct描述,是用来表示输出只能显示不同的值,相同的值被略去  distinct 究竟是作用于一列,还是多列 distinct 与 limit合用时,当有前面的数据重合时, limit会不会补位呢?">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-021-mysql-distinct只能应用于所有列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/02/021-mysql-distinct只能应用于所有列/" class="article-date">
+  <time datetime="2017-12-02T13:45:02.000Z" itemprop="datePublished">2017-12-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      021-mysql-distinct只能应用于所有列
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mysql的distinct描述,是用来表示输出只能显示不同的值,相同的值被略去</p>
+<ul>
+<li>distinct 究竟是作用于一列,还是多列</li>
+<li>distinct 与 limit合用时,当有前面的数据重合时, limit会不会补位呢?</li>
+</ul>
+<a id="more"></a>
+<h3 id="distinct-究竟是作用于一列-还是多列"><a href="#distinct-究竟是作用于一列-还是多列" class="headerlink" title="distinct 究竟是作用于一列,还是多列"></a>distinct 究竟是作用于一列,还是多列</h3><p>如下所示, 数据库有4行数据,其中对于a1列来说, 只有两个值, 分别是1和3</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">+------+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>一般情况下,我们选择a1列的输出是用: select a1 from b;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a1 from b;</span><br><span class="line">+------+</span><br><span class="line">| a1   |</span><br><span class="line">+------+</span><br><span class="line">|    1 |</span><br><span class="line">|    3 |</span><br><span class="line">|    1 |</span><br><span class="line">|    1 |</span><br><span class="line">+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>如果为了得到不一样值,则使用sql : select distinct a1 from b;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select distinct a1 from b;</span><br><span class="line">+------+</span><br><span class="line">| a1   |</span><br><span class="line">+------+</span><br><span class="line">|    1 |</span><br><span class="line">|    3 |</span><br><span class="line">+------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p> 这时候,如果我们的输出列又加上一列a2值, distinct会是什么行为呢? 是修饰a1列显示不同,还是a1,a2列显示的不同值呢?</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select distinct a1,a2 from b;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">+------+------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>由上面实验,可以看出,他修饰的是a1和a2两个列的显示行为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The ALL and DISTINCT modifiers specify whether duplicate rows should be returned. ALL (the default) specifies that all matching rows should be returned, including duplicates. DISTINCT specifies removal of duplicate rows from the result <span class="built_in">set</span>. It is an error to specify both modifiers. DISTINCTROW is a synonym <span class="keyword">for</span> DISTINCT.</span><br></pre></td></tr></table></figure>
+<h3 id="distinct-与-limit合用时-当有前面的数据重合时-limit会不会补位呢"><a href="#distinct-与-limit合用时-当有前面的数据重合时-limit会不会补位呢" class="headerlink" title="distinct 与 limit合用时,当有前面的数据重合时, limit会不会补位呢?"></a>distinct 与 limit合用时,当有前面的数据重合时, limit会不会补位呢?</h3><ol>
+<li><p>全量数据为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只有distinct的数据, 可以看出原始数据的第四行被忽略了显示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select distinct a1,a2 from b;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果加上limit 为4,我们再看一下效果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select distinct a1,a2 from b <span class="built_in">limit</span> 4;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>由这个结果可以看出, limit生效是在distinct之后,.</p>
+</li>
+<li><p>补充一个纯limit的运行结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a1,a2 from b <span class="built_in">limit</span> 4;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">+------+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/02/021-mysql-distinct只能应用于所有列/" data-id="cjdq1v0v1000whgvr900xlo7y" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/06/022-mysql-group-by应用于多个列/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          022-mysql-group-by应用于多个列
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/15/001-mysql半同步模式建立/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">001-mysql半同步模式建立</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/16/004-hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/">035-如何引用定义不同类型转换时-会发生什么</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

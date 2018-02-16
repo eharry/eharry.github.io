@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>mysql-1 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="mysql 简介 mysql 登录: mysql -u root -p mysql 登出:  123mysql&amp;gt; exitByebash-3.2$  查看数据库: SHOW DATABASES; 123456789101112mysql&amp;gt; SHOW DATABASES;+--------------------+| Database           |+--------------">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql-1">
+<meta property="og:url" content="http://yoursite.com/2017/10/14/008-mysql-1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="mysql 简介 mysql 登录: mysql -u root -p mysql 登出:  123mysql&amp;gt; exitByebash-3.2$  查看数据库: SHOW DATABASES; 123456789101112mysql&amp;gt; SHOW DATABASES;+--------------------+| Database           |+--------------">
+<meta property="og:updated_time" content="2018-02-16T14:45:57.536Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql-1">
+<meta name="twitter:description" content="mysql 简介 mysql 登录: mysql -u root -p mysql 登出:  123mysql&amp;gt; exitByebash-3.2$  查看数据库: SHOW DATABASES; 123456789101112mysql&amp;gt; SHOW DATABASES;+--------------------+| Database           |+--------------">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-008-mysql-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/14/008-mysql-1/" class="article-date">
+  <time datetime="2017-10-14T12:42:13.000Z" itemprop="datePublished">2017-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysql-1
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="mysql-简介"><a href="#mysql-简介" class="headerlink" title="mysql 简介"></a>mysql 简介</h2><ul>
+<li>mysql 登录: mysql -u root -p</li>
+<li><p>mysql 登出: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; exit</span><br><span class="line">Bye</span><br><span class="line">bash-3.2$</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看数据库: SHOW DATABASES;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW DATABASES;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>查看数据表: SHOW TABLES;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; USE mysql;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; SHOW TABLES;</span><br><span class="line">+---------------------------+</span><br><span class="line">| Tables_in_mysql           |</span><br><span class="line">+---------------------------+</span><br><span class="line">| columns_priv              |</span><br><span class="line">| db                        |</span><br><span class="line">| engine_cost               |</span><br><span class="line">| event                     |</span><br><span class="line">| func                      |</span><br><span class="line">| general_log               |</span><br><span class="line">| gtid_executed             |</span><br><span class="line">| help_category             |</span><br><span class="line">| help_keyword              |</span><br><span class="line">| help_relation             |</span><br><span class="line">| help_topic                |</span><br><span class="line">| innodb_index_stats        |</span><br><span class="line">| innodb_table_stats        |</span><br><span class="line">| ndb_binlog_index          |</span><br><span class="line">| plugin                    |</span><br><span class="line">| proc                      |</span><br><span class="line">| procs_priv                |</span><br><span class="line">| proxies_priv              |</span><br><span class="line">| server_cost               |</span><br><span class="line">| servers                   |</span><br><span class="line">| slave_master_info         |</span><br><span class="line">| slave_relay_log_info      |</span><br><span class="line">| slave_worker_info         |</span><br><span class="line">| slow_log                  |</span><br><span class="line">| tables_priv               |</span><br><span class="line">| time_zone                 |</span><br><span class="line">| time_zone_leap_second     |</span><br><span class="line">| time_zone_name            |</span><br><span class="line">| time_zone_transition      |</span><br><span class="line">| time_zone_transition_type |</span><br><span class="line">| user                      |</span><br><span class="line">+---------------------------+</span><br><span class="line">31 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示列: SHOW COLUMNS FROM table_name;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW COLUMNS FROM db;</span><br><span class="line">+-----------------------+---------------+------+-----+---------+-------+</span><br><span class="line">| Field                 | Type          | Null | Key | Default | Extra |</span><br><span class="line">+-----------------------+---------------+------+-----+---------+-------+</span><br><span class="line">| Host                  | char(60)      | NO   | PRI |         |       |</span><br><span class="line">| Db                    | char(64)      | NO   | PRI |         |       |</span><br><span class="line">| User                  | char(32)      | NO   | PRI |         |       |</span><br><span class="line">| Select_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Insert_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Update_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Delete_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Create_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Drop_priv             | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Grant_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| References_priv       | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Index_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Alter_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Create_tmp_table_priv | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Lock_tables_priv      | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Create_view_priv      | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Show_view_priv        | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Create_routine_priv   | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Alter_routine_priv    | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Execute_priv          | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Event_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Trigger_priv          | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">+-----------------------+---------------+------+-----+---------+-------+</span><br><span class="line">22 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看表结构: SHOW table,  这个就是 SHOW COLUMNS FROM table的快捷方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; desc db;</span><br><span class="line">+-----------------------+---------------+------+-----+---------+-------+</span><br><span class="line">| Field                 | Type          | Null | Key | Default | Extra |</span><br><span class="line">+-----------------------+---------------+------+-----+---------+-------+</span><br><span class="line">| Host                  | char(60)      | NO   | PRI |         |       |</span><br><span class="line">| Db                    | char(64)      | NO   | PRI |         |       |</span><br><span class="line">| User                  | char(32)      | NO   | PRI |         |       |</span><br><span class="line">| Select_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Insert_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Update_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Delete_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Create_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Drop_priv             | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Grant_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| References_priv       | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Index_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Alter_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Create_tmp_table_priv | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Lock_tables_priv      | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Create_view_priv      | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Show_view_priv        | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Create_routine_priv   | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Alter_routine_priv    | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Execute_priv          | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Event_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">| Trigger_priv          | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>) | NO   |     | N       |       |</span><br><span class="line">+-----------------------+---------------+------+-----+---------+-------+</span><br><span class="line">22 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他SHOW语句指令</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>SHOW STATUS: 显示服务器状态信息</li>
+<li>SHOW CREATE DATABASE &amp; CREATE TABLE SHOW 显示数据库和表的创建sql </li>
+<li>SHOW GRANTS, 用来显示授权用户的安全权限</li>
+<li>SHOW ERRORS &amp; SHOW WARINGS 用于显示故障和告警</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW ERRORS;</span><br><span class="line">Empty <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SHOW WARNINGS;</span><br><span class="line">Empty <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>help SHOW 可以显示所有SHOW相关的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="built_in">help</span> SHOW;</span><br><span class="line">Name: <span class="string">'SHOW'</span></span><br><span class="line">Description:</span><br><span class="line">SHOW has many forms that provide information about databases, tables,</span><br><span class="line">columns, or status information about the server. This section describes</span><br><span class="line">those following:</span><br><span class="line"></span><br><span class="line">SHOW &#123;BINARY | MASTER&#125; LOGS</span><br><span class="line">SHOW BINLOG EVENTS [IN <span class="string">'log_name'</span>] [FROM pos] [LIMIT [offset,] row_count]</span><br><span class="line">SHOW CHARACTER SET [like_or_where]</span><br><span class="line">SHOW COLLATION [like_or_where]</span><br><span class="line">SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where]</span><br><span class="line">SHOW CREATE DATABASE db_name</span><br><span class="line">SHOW CREATE EVENT event_name</span><br><span class="line">SHOW CREATE FUNCTION func_name</span><br><span class="line">SHOW CREATE PROCEDURE proc_name</span><br><span class="line">SHOW CREATE TABLE tbl_name</span><br><span class="line">SHOW CREATE TRIGGER trigger_name</span><br><span class="line">SHOW CREATE VIEW view_name</span><br><span class="line">SHOW DATABASES [like_or_where]</span><br><span class="line">SHOW ENGINE engine_name &#123;STATUS | MUTEX&#125;</span><br><span class="line">SHOW [STORAGE] ENGINES</span><br><span class="line">SHOW ERRORS [LIMIT [offset,] row_count]</span><br><span class="line">SHOW EVENTS</span><br><span class="line">SHOW FUNCTION CODE func_name</span><br><span class="line">SHOW FUNCTION STATUS [like_or_where]</span><br><span class="line">SHOW GRANTS FOR user</span><br><span class="line">SHOW INDEX FROM tbl_name [FROM db_name]</span><br><span class="line">SHOW MASTER STATUS</span><br><span class="line">SHOW OPEN TABLES [FROM db_name] [like_or_where]</span><br><span class="line">SHOW PLUGINS</span><br><span class="line">SHOW PROCEDURE CODE proc_name</span><br><span class="line">SHOW PROCEDURE STATUS [like_or_where]</span><br><span class="line">SHOW PRIVILEGES</span><br><span class="line">SHOW [FULL] PROCESSLIST</span><br><span class="line">SHOW PROFILE [types] [FOR QUERY n] [OFFSET n] [LIMIT n]</span><br><span class="line">SHOW PROFILES</span><br><span class="line">SHOW RELAYLOG EVENTS [IN <span class="string">'log_name'</span>] [FROM pos] [LIMIT [offset,] row_count]</span><br><span class="line">SHOW SLAVE HOSTS</span><br><span class="line">SHOW SLAVE STATUS [FOR CHANNEL channel]</span><br><span class="line">SHOW [GLOBAL | SESSION] STATUS [like_or_where]</span><br><span class="line">SHOW TABLE STATUS [FROM db_name] [like_or_where]</span><br><span class="line">SHOW [FULL] TABLES [FROM db_name] [like_or_where]</span><br><span class="line">SHOW TRIGGERS [FROM db_name] [like_or_where]</span><br><span class="line">SHOW [GLOBAL | SESSION] VARIABLES [like_or_where]</span><br><span class="line">SHOW WARNINGS [LIMIT [offset,] row_count]</span><br><span class="line"></span><br><span class="line">like_or_where:</span><br><span class="line">    LIKE <span class="string">'pattern'</span></span><br><span class="line">  | WHERE expr</span><br><span class="line"></span><br><span class="line">If the syntax <span class="keyword">for</span> a given SHOW statement includes a LIKE <span class="string">'pattern'</span></span><br><span class="line">part, <span class="string">'pattern'</span> is a string that can contain the SQL % and _ wildcard</span><br><span class="line">characters. The pattern is useful <span class="keyword">for</span> restricting statement output to</span><br><span class="line">matching values.</span><br><span class="line"></span><br><span class="line">Several SHOW statements also accept a WHERE clause that provides more</span><br><span class="line">flexibility <span class="keyword">in</span> specifying <span class="built_in">which</span> rows to display. See</span><br><span class="line">http://dev.mysql.com/doc/refman/5.7/en/extended-show.html.</span><br><span class="line"></span><br><span class="line">URL: http://dev.mysql.com/doc/refman/5.7/en/show.html</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示所有存储引擎: SHOW ENGINES;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW ENGINES;</span><br><span class="line">+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</span><br><span class="line">| Engine             | Support | Comment                                                        | Transactions | XA   | Savepoints |</span><br><span class="line">+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</span><br><span class="line">| InnoDB             | DEFAULT | Supports transactions, row-level locking, and foreign keys     | YES          | YES  | YES        |</span><br><span class="line">| MRG_MYISAM         | YES     | Collection of identical MyISAM tables                          | NO           | NO   | NO         |</span><br><span class="line">| MEMORY             | YES     | Hash based, stored <span class="keyword">in</span> memory, useful <span class="keyword">for</span> temporary tables      | NO           | NO   | NO         |</span><br><span class="line">| BLACKHOLE          | YES     | /dev/null storage engine (anything you write to it disappears) | NO           | NO   | NO         |</span><br><span class="line">| MyISAM             | YES     | MyISAM storage engine                                          | NO           | NO   | NO         |</span><br><span class="line">| CSV                | YES     | CSV storage engine                                             | NO           | NO   | NO         |</span><br><span class="line">| ARCHIVE            | YES     | Archive storage engine                                         | NO           | NO   | NO         |</span><br><span class="line">| PERFORMANCE_SCHEMA | YES     | Performance Schema                                             | NO           | NO   | NO         |</span><br><span class="line">| FEDERATED          | NO      | Federated MySQL storage engine                                 | NULL         | NULL | NULL       |</span><br><span class="line">+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</span><br><span class="line">9 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>显示权限: SHOW PRIVILEGES;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW PRIVILEGES;</span><br><span class="line">+-------------------------+---------------------------------------+-------------------------------------------------------+</span><br><span class="line">| Privilege               | Context                               | Comment                                               |</span><br><span class="line">+-------------------------+---------------------------------------+-------------------------------------------------------+</span><br><span class="line">| Alter                   | Tables                                | To alter the table                                    |</span><br><span class="line">| Alter routine           | Functions,Procedures                  | To alter or drop stored <span class="built_in">functions</span>/procedures          |</span><br><span class="line">| Create                  | Databases,Tables,Indexes              | To create new databases and tables                    |</span><br><span class="line">| Create routine          | Databases                             | To use CREATE FUNCTION/PROCEDURE                      |</span><br><span class="line">| Create temporary tables | Databases                             | To use CREATE TEMPORARY TABLE                         |</span><br><span class="line">| Create view             | Tables                                | To create new views                                   |</span><br><span class="line">| Create user             | Server Admin                          | To create new users                                   |</span><br><span class="line">| Delete                  | Tables                                | To delete existing rows                               |</span><br><span class="line">| Drop                    | Databases,Tables                      | To drop databases, tables, and views                  |</span><br><span class="line">| Event                   | Server Admin                          | To create, alter, drop and execute events             |</span><br><span class="line">| Execute                 | Functions,Procedures                  | To execute stored routines                            |</span><br><span class="line">| File                    | File access on server                 | To <span class="built_in">read</span> and write files on the server                 |</span><br><span class="line">| Grant option            | Databases,Tables,Functions,Procedures | To give to other users those privileges you possess   |</span><br><span class="line">| Index                   | Tables                                | To create or drop indexes                             |</span><br><span class="line">| Insert                  | Tables                                | To insert data into tables                            |</span><br><span class="line">| Lock tables             | Databases                             | To use LOCK TABLES (together with SELECT privilege)   |</span><br><span class="line">| Process                 | Server Admin                          | To view the plain text of currently executing queries |</span><br><span class="line">| Proxy                   | Server Admin                          | To make proxy user possible                           |</span><br><span class="line">| References              | Databases,Tables                      | To have references on tables                          |</span><br><span class="line">| Reload                  | Server Admin                          | To reload or refresh tables, logs and privileges      |</span><br><span class="line">| Replication client      | Server Admin                          | To ask <span class="built_in">where</span> the slave or master servers are          |</span><br><span class="line">| Replication slave       | Server Admin                          | To <span class="built_in">read</span> binary <span class="built_in">log</span> events from the master             |</span><br><span class="line">| Select                  | Tables                                | To retrieve rows from table                           |</span><br><span class="line">| Show databases          | Server Admin                          | To see all databases with SHOW DATABASES              |</span><br><span class="line">| Show view               | Tables                                | To see views with SHOW CREATE VIEW                    |</span><br><span class="line">| Shutdown                | Server Admin                          | To shut down the server                               |</span><br><span class="line">| Super                   | Server Admin                          | To use KILL thread, SET GLOBAL, CHANGE MASTER, etc.   |</span><br><span class="line">| Trigger                 | Tables                                | To use triggers                                       |</span><br><span class="line">| Create tablespace       | Server Admin                          | To create/alter/drop tablespaces                      |</span><br><span class="line">| Update                  | Tables                                | To update existing rows                               |</span><br><span class="line">| Usage                   | Server Admin                          | No privileges - allow connect only                    |</span><br><span class="line">+-------------------------+---------------------------------------+-------------------------------------------------------+</span><br><span class="line">31 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示连接信息: SHOW PROCESSLIST;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW PROCESSLIST;</span><br><span class="line">+-----+------+-----------+-------+---------+------+----------+------------------+</span><br><span class="line">| Id  | User | Host      | db    | Command | Time | State    | Info             |</span><br><span class="line">+-----+------+-----------+-------+---------+------+----------+------------------+</span><br><span class="line">| 187 | root | localhost | mysql | Query   |    0 | starting | SHOW PROCESSLIST |</span><br><span class="line">+-----+------+-----------+-------+---------+------+----------+------------------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/14/008-mysql-1/" data-id="cjdq1v0up0009hgvrz6ftljdk" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/22/016-spring-boot-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          spring_boot_1
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/07/018-雷蛇键盘在macos的键位不对应的问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">雷蛇键盘在macos的键位不对应的问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/16/004-hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/">035-如何引用定义不同类型转换时-会发生什么</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

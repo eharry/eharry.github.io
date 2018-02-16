@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>java虚引用-弱引用-强引用-软引用直接的关系 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="引用类型 被垃圾回收时间 用途 生存时间     强引用 从来不会 对象的一般状态 JVM停止运行时终止   软引用 在内存不足时 对象缓存 内存不足时终止   弱引用 在垃圾回收时 对象缓存 gc运行后终止   虚引用 Unknown Unknown Unknown    资料来源: http://blog.csdn.net/mazhimazh/article/details/197524">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java虚引用-弱引用-强引用-软引用直接的关系">
+<meta property="og:url" content="http://yoursite.com/2017/10/29/005-java虚引用-弱引用-强引用-软引用直接的关系/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="引用类型 被垃圾回收时间 用途 生存时间     强引用 从来不会 对象的一般状态 JVM停止运行时终止   软引用 在内存不足时 对象缓存 内存不足时终止   弱引用 在垃圾回收时 对象缓存 gc运行后终止   虚引用 Unknown Unknown Unknown    资料来源: http://blog.csdn.net/mazhimazh/article/details/197524">
+<meta property="og:updated_time" content="2018-02-16T14:45:57.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java虚引用-弱引用-强引用-软引用直接的关系">
+<meta name="twitter:description" content="引用类型 被垃圾回收时间 用途 生存时间     强引用 从来不会 对象的一般状态 JVM停止运行时终止   软引用 在内存不足时 对象缓存 内存不足时终止   弱引用 在垃圾回收时 对象缓存 gc运行后终止   虚引用 Unknown Unknown Unknown    资料来源: http://blog.csdn.net/mazhimazh/article/details/197524">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-005-java虚引用-弱引用-强引用-软引用直接的关系" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/29/005-java虚引用-弱引用-强引用-软引用直接的关系/" class="article-date">
+  <time datetime="2017-10-29T05:14:03.000Z" itemprop="datePublished">2017-10-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java虚引用-弱引用-强引用-软引用直接的关系
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <table>
+<thead>
+<tr>
+<th>引用类型</th>
+<th style="text-align:center">被垃圾回收时间</th>
+<th style="text-align:right">用途</th>
+<th style="text-align:right">生存时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>强引用</td>
+<td style="text-align:center">从来不会</td>
+<td style="text-align:right">对象的一般状态</td>
+<td style="text-align:right">JVM停止运行时终止</td>
+</tr>
+<tr>
+<td>软引用</td>
+<td style="text-align:center">在内存不足时</td>
+<td style="text-align:right">对象缓存</td>
+<td style="text-align:right">内存不足时终止</td>
+</tr>
+<tr>
+<td>弱引用</td>
+<td style="text-align:center">在垃圾回收时</td>
+<td style="text-align:right">对象缓存</td>
+<td style="text-align:right">gc运行后终止</td>
+</tr>
+<tr>
+<td>虚引用</td>
+<td style="text-align:center">Unknown</td>
+<td style="text-align:right">Unknown</td>
+<td style="text-align:right">Unknown</td>
+</tr>
+</tbody>
+</table>
+<p>资料来源: <a href="http://blog.csdn.net/mazhimazh/article/details/19752475" target="_blank" rel="noopener">http://blog.csdn.net/mazhimazh/article/details/19752475</a><br><a id="more"></a></p>
+<ul>
+<li>java中存在4种引用,分别是强引用,软引用,弱引用和虚引用。</li>
+<li>引用的类型如上表格所示。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/29/005-java虚引用-弱引用-强引用-软引用直接的关系/" data-id="cjdq1v0un0006hgvrd2ah0xgd" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/04/010-mysql-my-cnf参数解释/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          mysql-my.cnf参数解释
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/23/017-spring-cloud-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">spring-cloud-1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/16/004-hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/">035-如何引用定义不同类型转换时-会发生什么</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

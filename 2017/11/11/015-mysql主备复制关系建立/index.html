@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>mysql主备复制关系建立 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="mysql主备关系建立  前提  首先需要一个mysql主机环境  其次需要一个mysql备机环境  保证mysql主机环境和备机环境的网络相同  保证两个环境的serverid不一致, 要不然无法建立主备关系  12345678mysql1 环境mysql&amp;gt; show variables like &apos;server_id&apos;;+---------------+-------+| Variab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql主备复制关系建立">
+<meta property="og:url" content="http://yoursite.com/2017/11/11/015-mysql主备复制关系建立/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="mysql主备关系建立  前提  首先需要一个mysql主机环境  其次需要一个mysql备机环境  保证mysql主机环境和备机环境的网络相同  保证两个环境的serverid不一致, 要不然无法建立主备关系  12345678mysql1 环境mysql&amp;gt; show variables like &apos;server_id&apos;;+---------------+-------+| Variab">
+<meta property="og:updated_time" content="2018-02-16T14:45:57.538Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql主备复制关系建立">
+<meta name="twitter:description" content="mysql主备关系建立  前提  首先需要一个mysql主机环境  其次需要一个mysql备机环境  保证mysql主机环境和备机环境的网络相同  保证两个环境的serverid不一致, 要不然无法建立主备关系  12345678mysql1 环境mysql&amp;gt; show variables like &apos;server_id&apos;;+---------------+-------+| Variab">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-015-mysql主备复制关系建立" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/11/015-mysql主备复制关系建立/" class="article-date">
+  <time datetime="2017-11-11T12:22:52.000Z" itemprop="datePublished">2017-11-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysql主备复制关系建立
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>mysql主备关系建立</p>
+<ul>
+<li><p>前提</p>
+<ul>
+<li><p>首先需要一个mysql主机环境</p>
+</li>
+<li><p>其次需要一个mysql备机环境</p>
+</li>
+<li><p>保证mysql主机环境和备机环境的网络相同</p>
+</li>
+<li><p>保证两个环境的serverid不一致, 要不然无法建立主备关系</p>
+<ul>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql1 环境</span><br><span class="line">mysql&gt; show variables like <span class="string">'server_id'</span>;</span><br><span class="line">+---------------+-------+</span><br><span class="line">| Variable_name | Value |</span><br><span class="line">+---------------+-------+</span><br><span class="line">| server_id     | 1     |</span><br><span class="line">+---------------+-------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql2环境</span><br><span class="line">mysql&gt; show variables like <span class="string">'server_id'</span>;</span><br><span class="line">+---------------+-------+</span><br><span class="line">| Variable_name | Value |</span><br><span class="line">+---------------+-------+</span><br><span class="line">| server_id     | 2     |</span><br><span class="line">+---------------+-------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>操作步骤</p>
+<ul>
+<li><p>建立一个账户用于数据同步</p>
+<ul>
+<li><p>查看当前数据库有哪些账户</p>
+<ul>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; desc mysql.user;</span><br><span class="line">+------------------------+-----------------------------------+------+-----+-----------------------+-------+</span><br><span class="line">| Field                  | Type                              | Null | Key | Default               | Extra |</span><br><span class="line">+------------------------+-----------------------------------+------+-----+-----------------------+-------+</span><br><span class="line">| Host                   | char(60)                          | NO   | PRI |                       |       |</span><br><span class="line">| User                   | char(32)                          | NO   | PRI |                       |       |</span><br><span class="line">| Select_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Insert_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Update_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Delete_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Create_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Drop_priv              | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Reload_priv            | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Shutdown_priv          | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Process_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| File_priv              | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Grant_priv             | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| References_priv        | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Index_priv             | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Alter_priv             | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Show_db_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Super_priv             | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Create_tmp_table_priv  | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Lock_tables_priv       | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Execute_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Repl_slave_priv        | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Repl_client_priv       | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Create_view_priv       | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Show_view_priv         | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Create_routine_priv    | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Alter_routine_priv     | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Create_user_priv       | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Event_priv             | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Trigger_priv           | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| Create_tablespace_priv | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| ssl_type               | enum(<span class="string">''</span>,<span class="string">'ANY'</span>,<span class="string">'X509'</span>,<span class="string">'SPECIFIED'</span>) | NO   |     |                       |       |</span><br><span class="line">| ssl_cipher             | blob                              | NO   |     | NULL                  |       |</span><br><span class="line">| x509_issuer            | blob                              | NO   |     | NULL                  |       |</span><br><span class="line">| x509_subject           | blob                              | NO   |     | NULL                  |       |</span><br><span class="line">| max_questions          | int(11) unsigned                  | NO   |     | 0                     |       |</span><br><span class="line">| max_updates            | int(11) unsigned                  | NO   |     | 0                     |       |</span><br><span class="line">| max_connections        | int(11) unsigned                  | NO   |     | 0                     |       |</span><br><span class="line">| max_user_connections   | int(11) unsigned                  | NO   |     | 0                     |       |</span><br><span class="line">| plugin                 | char(64)                          | NO   |     | mysql_native_password |       |</span><br><span class="line">| authentication_string  | text                              | YES  |     | NULL                  |       |</span><br><span class="line">| password_expired       | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">| password_last_changed  | timestamp                         | YES  |     | NULL                  |       |</span><br><span class="line">| password_lifetime      | smallint(5) unsigned              | YES  |     | NULL                  |       |</span><br><span class="line">| account_locked         | enum(<span class="string">'N'</span>,<span class="string">'Y'</span>)                     | NO   |     | N                     |       |</span><br><span class="line">+------------------------+-----------------------------------+------+-----+-----------------------+-------+</span><br><span class="line">45 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用select 查询mysql.user表, 查询系统中有几个用户</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select Host,User from mysql.user;</span><br><span class="line">+-----------+---------------+</span><br><span class="line">| Host      | User          |</span><br><span class="line">+-----------+---------------+</span><br><span class="line">| localhost | mysql.session |</span><br><span class="line">| localhost | mysql.sys     |</span><br><span class="line">| localhost | root          |</span><br><span class="line">+-----------+---------------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建用户,使用create user命令, create user语法如下:</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER [IF NOT EXISTS]</span><br><span class="line">    user [auth_option] [, user [auth_option]] ...</span><br><span class="line">    [REQUIRE &#123;NONE | tls_option [[AND] tls_option] ...&#125;]</span><br><span class="line">    [WITH resource_option [resource_option] ...]</span><br><span class="line">    [password_option | lock_option] ...</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE USER <span class="string">'repl'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'repl_password'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.05 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select host,user from mysql.user;</span><br><span class="line">+-----------+---------------+</span><br><span class="line">| host      | user          |</span><br><span class="line">+-----------+---------------+</span><br><span class="line">| %         | repl          |</span><br><span class="line">| localhost | mysql.session |</span><br><span class="line">| localhost | mysql.sys     |</span><br><span class="line">| localhost | root          |</span><br><span class="line">+-----------+---------------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>下来赋予repl这个账号复制权限</p>
+<ul>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT REPLICATION SLAVE ON *.* TO <span class="string">'repl'</span>@<span class="string">'%'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看权限是否设置成功</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from mysql.user <span class="built_in">where</span> user = <span class="string">'repl'</span> \G;</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">                  Host: %</span><br><span class="line">                  User: repl</span><br><span class="line">           Select_priv: N</span><br><span class="line">           Insert_priv: N</span><br><span class="line">           Update_priv: N</span><br><span class="line">           Delete_priv: N</span><br><span class="line">           Create_priv: N</span><br><span class="line">             Drop_priv: N</span><br><span class="line">           Reload_priv: N</span><br><span class="line">         Shutdown_priv: N</span><br><span class="line">          Process_priv: N</span><br><span class="line">             File_priv: N</span><br><span class="line">            Grant_priv: N</span><br><span class="line">       References_priv: N</span><br><span class="line">            Index_priv: N</span><br><span class="line">            Alter_priv: N</span><br><span class="line">          Show_db_priv: N</span><br><span class="line">            Super_priv: N</span><br><span class="line"> Create_tmp_table_priv: N</span><br><span class="line">      Lock_tables_priv: N</span><br><span class="line">          Execute_priv: N</span><br><span class="line">       Repl_slave_priv: Y</span><br><span class="line">                  ^^^^^^^^^^^^^^^^可以看出,已经设置好了</span><br><span class="line">      Repl_client_priv: N</span><br><span class="line">      Create_view_priv: N</span><br><span class="line">        Show_view_priv: N</span><br><span class="line">   Create_routine_priv: N</span><br><span class="line">    Alter_routine_priv: N</span><br><span class="line">      Create_user_priv: N</span><br><span class="line">            Event_priv: N</span><br><span class="line">          Trigger_priv: N</span><br><span class="line">Create_tablespace_priv: N</span><br><span class="line">              ssl_type:</span><br><span class="line">            ssl_cipher:</span><br><span class="line">           x509_issuer:</span><br><span class="line">          x509_subject:</span><br><span class="line">         max_questions: 0</span><br><span class="line">           max_updates: 0</span><br><span class="line">       max_connections: 0</span><br><span class="line">  max_user_connections: 0</span><br><span class="line">                plugin: mysql_native_password</span><br><span class="line"> authentication_string: *E10F09E41DEE2943D20B11E2A6A03A81E41F2D89</span><br><span class="line">      password_expired: N</span><br><span class="line"> password_last_changed: 2017-11-12 11:28:47</span><br><span class="line">     password_lifetime: NULL</span><br><span class="line">        account_locked: N</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">ERROR:</span><br><span class="line">No query specified</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意, 在一些别的博客上, 我们经常看到类似地下语句:</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO <span class="string">'root@'</span>%<span class="string">' IDENTIFIED BY '</span>root<span class="string">';</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面的语句,将创建用户和给用户指定权限两个功能合二为一, 这个是利用了grant的一个特性,但这个操作是官方不建议的操作.</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Note</span><br><span class="line">If an account named in a GRANT statement does not already exist, GRANT may create it under the conditions described later in the discussion of the NO_AUTO_CREATE_USER SQL mode. It is also possible to use GRANT to specify nonprivilege account characteristics such as whether it uses secure connections and limits on access to server resources.</span><br><span class="line"></span><br><span class="line">However, use of GRANT to create accounts or define nonprivilege characteristics is deprecated as of MySQL 5.7.6. Instead, perform these tasks using CREATE USER or ALTER USER.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在备机上做同样的操作,然后保证两个mysql,都已经repl账号,并且设置了相应的密码</p>
+</li>
+</ul>
+</li>
+<li><p>在备机设置master地址</p>
+<ul>
+<li><p>CHANGE MASTER TO Syntax</p>
+<ul>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">CHANGE MASTER TO option [, option] ... [ channel_option ]</span><br><span class="line"></span><br><span class="line">option:</span><br><span class="line">    MASTER_BIND = <span class="string">'interface_name'</span></span><br><span class="line">  | MASTER_HOST = <span class="string">'host_name'</span></span><br><span class="line">  | MASTER_USER = <span class="string">'user_name'</span></span><br><span class="line">  | MASTER_PASSWORD = <span class="string">'password'</span></span><br><span class="line">  | MASTER_PORT = port_num</span><br><span class="line">  | MASTER_CONNECT_RETRY = interval</span><br><span class="line">  | MASTER_RETRY_COUNT = count</span><br><span class="line">  | MASTER_DELAY = interval</span><br><span class="line">  | MASTER_HEARTBEAT_PERIOD = interval</span><br><span class="line">  | MASTER_LOG_FILE = <span class="string">'master_log_name'</span></span><br><span class="line">  | MASTER_LOG_POS = master_log_pos</span><br><span class="line">  | MASTER_AUTO_POSITION = &#123;0|1&#125;</span><br><span class="line">  | RELAY_LOG_FILE = <span class="string">'relay_log_name'</span></span><br><span class="line">  | RELAY_LOG_POS = relay_log_pos</span><br><span class="line">  | MASTER_SSL = &#123;0|1&#125;</span><br><span class="line">  | MASTER_SSL_CA = <span class="string">'ca_file_name'</span></span><br><span class="line">  | MASTER_SSL_CAPATH = <span class="string">'ca_directory_name'</span></span><br><span class="line">  | MASTER_SSL_CERT = <span class="string">'cert_file_name'</span></span><br><span class="line">  | MASTER_SSL_CRL = <span class="string">'crl_file_name'</span></span><br><span class="line">  | MASTER_SSL_CRLPATH = <span class="string">'crl_directory_name'</span></span><br><span class="line">  | MASTER_SSL_KEY = <span class="string">'key_file_name'</span></span><br><span class="line">  | MASTER_SSL_CIPHER = <span class="string">'cipher_list'</span></span><br><span class="line">  | MASTER_SSL_VERIFY_SERVER_CERT = &#123;0|1&#125;</span><br><span class="line">  | MASTER_TLS_VERSION = <span class="string">'protocol_list'</span></span><br><span class="line">  | IGNORE_SERVER_IDS = (server_id_list)</span><br><span class="line"></span><br><span class="line">channel_option:</span><br><span class="line">    FOR CHANNEL channel</span><br><span class="line"></span><br><span class="line">server_id_list:</span><br><span class="line">    [server_id [, server_id] ... ]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查主机的当前的bin log和position</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show master status \G;</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">             File: mybinlog.000001</span><br><span class="line">         Position: 839</span><br><span class="line">     Binlog_Do_DB:</span><br><span class="line"> Binlog_Ignore_DB:</span><br><span class="line">Executed_Gtid_Set: ed0cc966-c7b9-11e7-bc17-0242ac110002:1-3</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>​</p>
+</li>
+<li><p>在备机运行change master to</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CHANGE MASTER TO</span><br><span class="line">    -&gt;   MASTER_HOST=<span class="string">'172.17.0.2'</span>,</span><br><span class="line">    -&gt;   MASTER_USER=<span class="string">'repl'</span>,</span><br><span class="line">    -&gt;   MASTER_PASSWORD=<span class="string">'repl_password'</span>,</span><br><span class="line">    -&gt;   MASTER_PORT=10000,</span><br><span class="line">    -&gt;   MASTER_LOG_FILE=<span class="string">'mybinlog.000001'</span>,</span><br><span class="line">    -&gt;   MASTER_LOG_POS=839,</span><br><span class="line">    -&gt;   MASTER_CONNECT_RETRY=3;</span><br><span class="line">Query OK, 0 rows affected, 2 warnings (0.04 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在备机运行show slave status</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show slave status \G;</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">               Slave_IO_State:</span><br><span class="line">                  Master_Host: 172.17.0.2</span><br><span class="line">                  Master_User: repl</span><br><span class="line">                  Master_Port: 10000</span><br><span class="line">                Connect_Retry: 3</span><br><span class="line">              Master_Log_File: mybinlog.000001</span><br><span class="line">          Read_Master_Log_Pos: 839</span><br><span class="line">               Relay_Log_File: 2d7143dab7a4-relay-bin.000001</span><br><span class="line">                Relay_Log_Pos: 4</span><br><span class="line">        Relay_Master_Log_File: mybinlog.000001</span><br><span class="line">             Slave_IO_Running: No</span><br><span class="line">            Slave_SQL_Running: No</span><br><span class="line">              Replicate_Do_DB:</span><br><span class="line">          Replicate_Ignore_DB:</span><br><span class="line">           Replicate_Do_Table:</span><br><span class="line">       Replicate_Ignore_Table:</span><br><span class="line">      Replicate_Wild_Do_Table:</span><br><span class="line">  Replicate_Wild_Ignore_Table:</span><br><span class="line">                   Last_Errno: 0</span><br><span class="line">                   Last_Error:</span><br><span class="line">                 Skip_Counter: 0</span><br><span class="line">          Exec_Master_Log_Pos: 839</span><br><span class="line">              Relay_Log_Space: 154</span><br><span class="line">              Until_Condition: None</span><br><span class="line">               Until_Log_File:</span><br><span class="line">                Until_Log_Pos: 0</span><br><span class="line">           Master_SSL_Allowed: No</span><br><span class="line">           Master_SSL_CA_File:</span><br><span class="line">           Master_SSL_CA_Path:</span><br><span class="line">              Master_SSL_Cert:</span><br><span class="line">            Master_SSL_Cipher:</span><br><span class="line">               Master_SSL_Key:</span><br><span class="line">        Seconds_Behind_Master: NULL</span><br><span class="line">Master_SSL_Verify_Server_Cert: No</span><br><span class="line">                Last_IO_Errno: 0</span><br><span class="line">                Last_IO_Error:</span><br><span class="line">               Last_SQL_Errno: 0</span><br><span class="line">               Last_SQL_Error:</span><br><span class="line">  Replicate_Ignore_Server_Ids:</span><br><span class="line">             Master_Server_Id: 0</span><br><span class="line">                  Master_UUID:</span><br><span class="line">             Master_Info_File: mysql.slave_master_info</span><br><span class="line">                    SQL_Delay: 0</span><br><span class="line">          SQL_Remaining_Delay: NULL</span><br><span class="line">      Slave_SQL_Running_State:</span><br><span class="line">           Master_Retry_Count: 86400</span><br><span class="line">                  Master_Bind:</span><br><span class="line">      Last_IO_Error_Timestamp:</span><br><span class="line">     Last_SQL_Error_Timestamp:</span><br><span class="line">               Master_SSL_Crl:</span><br><span class="line">           Master_SSL_Crlpath:</span><br><span class="line">           Retrieved_Gtid_Set:</span><br><span class="line">            Executed_Gtid_Set: 4d8df011-c7a4-11e7-bf90-0242ac110003:1-3</span><br><span class="line">                Auto_Position: 0</span><br><span class="line">         Replicate_Rewrite_DB:</span><br><span class="line">                 Channel_Name:</span><br><span class="line">           Master_TLS_Version:</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后运行start slave后,再次查看slave 状态</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; start slave</span><br><span class="line">    -&gt; ;</span><br><span class="line">Query OK, 0 rows affected (0.02 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show slave status \G;</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">               Slave_IO_State: Waiting <span class="keyword">for</span> master to send event</span><br><span class="line">                  Master_Host: 172.17.0.2</span><br><span class="line">                  Master_User: repl</span><br><span class="line">                  Master_Port: 10000</span><br><span class="line">                Connect_Retry: 3</span><br><span class="line">              Master_Log_File: mybinlog.000001</span><br><span class="line">          Read_Master_Log_Pos: 839</span><br><span class="line">               Relay_Log_File: 2d7143dab7a4-relay-bin.000002</span><br><span class="line">                Relay_Log_Pos: 319</span><br><span class="line">        Relay_Master_Log_File: mybinlog.000001</span><br><span class="line">             Slave_IO_Running: Yes</span><br><span class="line">            Slave_SQL_Running: Yes</span><br><span class="line">              Replicate_Do_DB:</span><br><span class="line">          Replicate_Ignore_DB:</span><br><span class="line">           Replicate_Do_Table:</span><br><span class="line">       Replicate_Ignore_Table:</span><br><span class="line">      Replicate_Wild_Do_Table:</span><br><span class="line">  Replicate_Wild_Ignore_Table:</span><br><span class="line">                   Last_Errno: 0</span><br><span class="line">                   Last_Error:</span><br><span class="line">                 Skip_Counter: 0</span><br><span class="line">          Exec_Master_Log_Pos: 839</span><br><span class="line">              Relay_Log_Space: 533</span><br><span class="line">              Until_Condition: None</span><br><span class="line">               Until_Log_File:</span><br><span class="line">                Until_Log_Pos: 0</span><br><span class="line">           Master_SSL_Allowed: No</span><br><span class="line">           Master_SSL_CA_File:</span><br><span class="line">           Master_SSL_CA_Path:</span><br><span class="line">              Master_SSL_Cert:</span><br><span class="line">            Master_SSL_Cipher:</span><br><span class="line">               Master_SSL_Key:</span><br><span class="line">        Seconds_Behind_Master: 0</span><br><span class="line">Master_SSL_Verify_Server_Cert: No</span><br><span class="line">                Last_IO_Errno: 0</span><br><span class="line">                Last_IO_Error:</span><br><span class="line">               Last_SQL_Errno: 0</span><br><span class="line">               Last_SQL_Error:</span><br><span class="line">  Replicate_Ignore_Server_Ids:</span><br><span class="line">             Master_Server_Id: 1</span><br><span class="line">                  Master_UUID: ed0cc966-c7b9-11e7-bc17-0242ac110002</span><br><span class="line">             Master_Info_File: mysql.slave_master_info</span><br><span class="line">                    SQL_Delay: 0</span><br><span class="line">          SQL_Remaining_Delay: NULL</span><br><span class="line">      Slave_SQL_Running_State: Slave has <span class="built_in">read</span> all relay <span class="built_in">log</span>; waiting <span class="keyword">for</span> more updates</span><br><span class="line">           Master_Retry_Count: 86400</span><br><span class="line">                  Master_Bind:</span><br><span class="line">      Last_IO_Error_Timestamp:</span><br><span class="line">     Last_SQL_Error_Timestamp:</span><br><span class="line">               Master_SSL_Crl:</span><br><span class="line">           Master_SSL_Crlpath:</span><br><span class="line">           Retrieved_Gtid_Set:</span><br><span class="line">            Executed_Gtid_Set: 4d8df011-c7a4-11e7-bf90-0242ac110003:1-3</span><br><span class="line">                Auto_Position: 0</span><br><span class="line">         Replicate_Rewrite_DB:</span><br><span class="line">                 Channel_Name:</span><br><span class="line">           Master_TLS_Version:</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>验证主备是否配置成功</p>
+<ul>
+<li><p>在主机建立一个test1数据库</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database test1;</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">| test1              |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.03 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在备机查看数据库信息</p>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">| test1              |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.03 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>可以看出主备关系已经成功建立, 当主机出现故障的时候,备机可以直接使用.</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/11/015-mysql主备复制关系建立/" data-id="cjdq1v0uy000qhgvrnh8cfpc4" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/13/014-mysql一主多从-星型结构/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          mysql一主多从-星型结构
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/11/012-mysql-几种启动和关闭方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">mysql-几种启动和关闭方式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/16/004-hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/">035-如何引用定义不同类型转换时-会发生什么</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

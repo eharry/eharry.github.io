@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-024-mysql-join-初步试用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/07/024-mysql-join-初步试用/" class="article-date">
+  <time datetime="2017-12-07T14:36:39.000Z" itemprop="datePublished">2017-12-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/07/024-mysql-join-初步试用/">024-mysql-join-初步试用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数据库中存在两个表,k1和k2:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from k1;</span><br><span class="line">+----+--------+</span><br><span class="line">| id | name   |</span><br><span class="line">+----+--------+</span><br><span class="line">|  1 | name_a |</span><br><span class="line">|  2 | name_b |</span><br><span class="line">+----+--------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from k2;</span><br><span class="line">+----+---------+</span><br><span class="line">| id | value   |</span><br><span class="line">+----+---------+</span><br><span class="line">|  1 | value_a |</span><br><span class="line">|  2 | value_b |</span><br><span class="line">+----+---------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>利用where进行join操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select k1.id,k1.name,k2.value from k1,k2 <span class="built_in">where</span> k1.id=k2.id;</span><br><span class="line">+----+--------+---------+</span><br><span class="line">| id | name   | value   |</span><br><span class="line">+----+--------+---------+</span><br><span class="line">|  1 | name_a | value_a |</span><br><span class="line">|  2 | name_b | value_b |</span><br><span class="line">+----+--------+---------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>利用inner join进行操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select k1.id,k1.name,k2.value from k1 inner join k2 on k1.id=k2.id;</span><br><span class="line">+----+--------+---------+</span><br><span class="line">| id | name   | value   |</span><br><span class="line">+----+--------+---------+</span><br><span class="line">|  1 | name_a | value_a |</span><br><span class="line">|  2 | name_b | value_b |</span><br><span class="line">+----+--------+---------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>如果where 没有连接条件的情况下, 同时select 两张表会发生什么呢?</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from k1,k2;</span><br><span class="line">+----+--------+----+---------+</span><br><span class="line">| id | name   | id | value   |</span><br><span class="line">+----+--------+----+---------+</span><br><span class="line">|  1 | name_a |  1 | value_a |</span><br><span class="line">|  2 | name_b |  1 | value_a |</span><br><span class="line">|  1 | name_a |  2 | value_b |</span><br><span class="line">|  2 | name_b |  2 | value_b |</span><br><span class="line">+----+--------+----+---------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看出,上面的语句,将k1里面的所有行和k2表里面的所有行进行了全排列的输出.</p>
+<p>如果join操作后面不跟on的连接限制,也会是同样的效果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select k1.id,k1.name,k2.value from k1 inner join k2;</span><br><span class="line">+----+--------+---------+</span><br><span class="line">| id | name   | value   |</span><br><span class="line">+----+--------+---------+</span><br><span class="line">|  1 | name_a | value_a |</span><br><span class="line">|  2 | name_b | value_a |</span><br><span class="line">|  1 | name_a | value_b |</span><br><span class="line">|  2 | name_b | value_b |</span><br><span class="line">+----+--------+---------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/07/024-mysql-join-初步试用/" data-id="cjdq1v0v40013hgvrwoskx5po" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-023-mysql-having-初步使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/07/023-mysql-having-初步使用/" class="article-date">
+  <time datetime="2017-12-07T05:34:22.000Z" itemprop="datePublished">2017-12-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/07/023-mysql-having-初步使用/">023-mysql-having-初步使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>having 配合 group by 一起使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a1,a2 from b group by a1,a2;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select a1,a2 from b group by a1,a2 having a1!=3;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看出, having 可以直接过滤掉一个分组结果</p>
+</li>
+</ul>
+<ul>
+<li>having和where的功能很类似,where应用于行的搜索, having应用于分组的搜索.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/07/023-mysql-having-初步使用/" data-id="cjdq1v0v30011hgvr8d7yx3nc" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-022-mysql-group-by应用于多个列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/06/022-mysql-group-by应用于多个列/" class="article-date">
+  <time datetime="2017-12-06T15:59:08.000Z" itemprop="datePublished">2017-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/06/022-mysql-group-by应用于多个列/">022-mysql-group-by应用于多个列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>group by做位分组函数, 简单的用法可以分组给定的列</p>
+<p>如下所示, 系统中所有数据为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br></pre></td></tr></table></figure>
+<p>如果对a1进行group by操作,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a1 from b group by a1;</span><br><span class="line">+------+</span><br><span class="line">| a1   |</span><br><span class="line">+------+</span><br><span class="line">|    1 |</span><br><span class="line">|    3 |</span><br><span class="line">+------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看出, 只是将a1,两行不同的值被group起来了</p>
+<p>接下来,我们试试,看能否指定查询列和group by不同列</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a1 from b group by a2;</span><br><span class="line">ERROR 1055 (42000): Expression <span class="comment">#1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'test1.b.a1' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by</span></span><br></pre></td></tr></table></figure>
+<p>可以看出,mysql不允许这种方式使用.</p>
+<p>但是如果使用了聚集函数,那么还是允许select列和group by列不相同的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select count(a2) from b group by a1;</span><br><span class="line">+-----------+</span><br><span class="line">| count(a2) |</span><br><span class="line">+-----------+</span><br><span class="line">|         4 |</span><br><span class="line">|         1 |</span><br><span class="line">+-----------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看出,group by仍然按照a1进行分类.</p>
+<p>那么group by是否可以使用到多个列中呢?</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select a1,a2 from b group by a1,a2;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看出,按照a1和a2的联合方式进行了group操作.</p>
+<ul>
+<li><p>select *  是否可以用在 group中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b group by a1,a2;</span><br><span class="line">+------+------+</span><br><span class="line">| a1   | a2   |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |    2 |</span><br><span class="line">|    1 |    3 |</span><br><span class="line">|    1 |    4 |</span><br><span class="line">|    3 |    4 |</span><br><span class="line">+------+------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>对于 group by全部列来说,是允许的.</p>
+<p>对于group by部分列来说, 是不允许的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b group by a1;</span><br><span class="line">ERROR 1055 (42000): Expression <span class="comment">#2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'test1.b.a2' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by</span></span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>group by后面是否可以加*</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from b group by *;</span><br><span class="line">ERROR 1064 (42000): You have an error <span class="keyword">in</span> your SQL syntax; check the manual that corresponds to your MySQL server version <span class="keyword">for</span> the right syntax to use near <span class="string">'*'</span> at line 1</span><br></pre></td></tr></table></figure>
+<p>答案, 不行</p>
+<p>​</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/06/022-mysql-group-by应用于多个列/" data-id="cjdq1v0v2000yhgvr1eed3tvd" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-021-mysql-distinct只能应用于所有列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/02/021-mysql-distinct只能应用于所有列/" class="article-date">
+  <time datetime="2017-12-02T13:45:02.000Z" itemprop="datePublished">2017-12-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/02/021-mysql-distinct只能应用于所有列/">021-mysql-distinct只能应用于所有列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mysql的distinct描述,是用来表示输出只能显示不同的值,相同的值被略去</p>
+<ul>
+<li>distinct 究竟是作用于一列,还是多列</li>
+<li>distinct 与 limit合用时,当有前面的数据重合时, limit会不会补位呢?</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2017/12/02/021-mysql-distinct只能应用于所有列/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/02/021-mysql-distinct只能应用于所有列/" data-id="cjdq1v0v1000whgvr900xlo7y" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-001-mysql半同步模式建立" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/15/001-mysql半同步模式建立/" class="article-date">
+  <time datetime="2017-11-15T04:46:51.000Z" itemprop="datePublished">2017-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/15/001-mysql半同步模式建立/">001-mysql半同步模式建立</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>搭建mysql半同步的模式</p>
+<ul>
+<li><p>前提</p>
+<ul>
+<li>已经搭建了mysql主备异步模式</li>
+</ul>
+</li>
+<li><p>步骤</p>
+<ul>
+<li><p>主节点安装master.so</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install plugin rpl_semi_sync_master soname <span class="string">'semisync_master.so'</span>;</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>备节点安装slave.so</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install plugin rpl_semi_sync_slave soname &apos;semisync_slave.so&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在主节点上运行查看系统配置命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like <span class="string">'rpl%'</span>;</span><br><span class="line">+-------------------------------------------+------------+</span><br><span class="line">| Variable_name                             | Value      |</span><br><span class="line">+-------------------------------------------+------------+</span><br><span class="line">| rpl_semi_sync_master_enabled              | OFF        |</span><br><span class="line">| rpl_semi_sync_master_timeout              | 10000      |</span><br><span class="line">| rpl_semi_sync_master_trace_level          | 32         |</span><br><span class="line">| rpl_semi_sync_master_wait_for_slave_count | 1          |</span><br><span class="line">| rpl_semi_sync_master_wait_no_slave        | ON         |</span><br><span class="line">| rpl_semi_sync_master_wait_point           | AFTER_SYNC |</span><br><span class="line">| rpl_stop_slave_timeout                    | 31536000   |</span><br><span class="line">+-------------------------------------------+------------+</span><br><span class="line">7 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看到master默认并没有开启半同步模式, 需要手动开启, 运行下面命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="built_in">set</span> global rpl_semi_sync_master_enabled=1;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show variables like <span class="string">'rpl%'</span>;</span><br><span class="line">+-------------------------------------------+------------+</span><br><span class="line">| Variable_name                             | Value      |</span><br><span class="line">+-------------------------------------------+------------+</span><br><span class="line">| rpl_semi_sync_master_enabled              | ON         |</span><br><span class="line">| rpl_semi_sync_master_timeout              | 10000      |</span><br><span class="line">| rpl_semi_sync_master_trace_level          | 32         |</span><br><span class="line">| rpl_semi_sync_master_wait_for_slave_count | 1          |</span><br><span class="line">| rpl_semi_sync_master_wait_no_slave        | ON         |</span><br><span class="line">| rpl_semi_sync_master_wait_point           | AFTER_SYNC |</span><br><span class="line">| rpl_stop_slave_timeout                    | 31536000   |</span><br><span class="line">+-------------------------------------------+------------+</span><br><span class="line">7 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在备节点运行set命令,修改半同步配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like <span class="string">'rpl%'</span>;</span><br><span class="line">+---------------------------------+----------+</span><br><span class="line">| Variable_name                   | Value    |</span><br><span class="line">+---------------------------------+----------+</span><br><span class="line">| rpl_semi_sync_slave_enabled     | OFF      |</span><br><span class="line">| rpl_semi_sync_slave_trace_level | 32       |</span><br><span class="line">| rpl_stop_slave_timeout          | 31536000 |</span><br><span class="line">+---------------------------------+----------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="built_in">set</span> global rpl_semi_sync_slave_enabled=1;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show variables like <span class="string">'rpl%'</span>;</span><br><span class="line">+---------------------------------+----------+</span><br><span class="line">| Variable_name                   | Value    |</span><br><span class="line">+---------------------------------+----------+</span><br><span class="line">| rpl_semi_sync_slave_enabled     | ON       |</span><br><span class="line">| rpl_semi_sync_slave_trace_level | 32       |</span><br><span class="line">| rpl_stop_slave_timeout          | 31536000 |</span><br><span class="line">+---------------------------------+----------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启io线程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; stop slave io_thread;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; start slave io_thread;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>检查半同步是否升值成功</p>
+<ul>
+<li><p>在主节点运行show命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show global status like <span class="string">'%semi%'</span>;</span><br><span class="line">+--------------------------------------------+-------+</span><br><span class="line">| Variable_name                              | Value |</span><br><span class="line">+--------------------------------------------+-------+</span><br><span class="line">| Rpl_semi_sync_master_clients               | 1     |</span><br><span class="line">| Rpl_semi_sync_master_net_avg_wait_time     | 0     |</span><br><span class="line">| Rpl_semi_sync_master_net_wait_time         | 0     |</span><br><span class="line">| Rpl_semi_sync_master_net_waits             | 0     |</span><br><span class="line">| Rpl_semi_sync_master_no_times              | 1     |</span><br><span class="line">| Rpl_semi_sync_master_no_tx                 | 0     |</span><br><span class="line">| Rpl_semi_sync_master_status                | ON    |</span><br><span class="line">| Rpl_semi_sync_master_timefunc_failures     | 0     |</span><br><span class="line">| Rpl_semi_sync_master_tx_avg_wait_time      | 0     |</span><br><span class="line">| Rpl_semi_sync_master_tx_wait_time          | 0     |</span><br><span class="line">| Rpl_semi_sync_master_tx_waits              | 0     |</span><br><span class="line">| Rpl_semi_sync_master_wait_pos_backtraverse | 0     |</span><br><span class="line">| Rpl_semi_sync_master_wait_sessions         | 0     |</span><br><span class="line">| Rpl_semi_sync_master_yes_tx                | 0     |</span><br><span class="line">+--------------------------------------------+-------+</span><br><span class="line">14 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在备节点运行show命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show global status like <span class="string">'%semi%'</span>;</span><br><span class="line">+----------------------------+-------+</span><br><span class="line">| Variable_name              | Value |</span><br><span class="line">+----------------------------+-------+</span><br><span class="line">| Rpl_semi_sync_slave_status | ON    |</span><br><span class="line">+----------------------------+-------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>在主节点test1数据库创建新的表t, 查看半同步的状态</p>
+<ul>
+<li><p>主节点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show global status like <span class="string">'%semi%'</span>;</span><br><span class="line">+--------------------------------------------+-------+</span><br><span class="line">| Variable_name                              | Value |</span><br><span class="line">+--------------------------------------------+-------+</span><br><span class="line">| Rpl_semi_sync_master_clients               | 1     |</span><br><span class="line">| Rpl_semi_sync_master_net_avg_wait_time     | 0     |</span><br><span class="line">| Rpl_semi_sync_master_net_wait_time         | 0     |</span><br><span class="line">| Rpl_semi_sync_master_net_waits             | 1     |</span><br><span class="line">| Rpl_semi_sync_master_no_times              | 1     |</span><br><span class="line">| Rpl_semi_sync_master_no_tx                 | 0     |</span><br><span class="line">| Rpl_semi_sync_master_status                | ON    |</span><br><span class="line">| Rpl_semi_sync_master_timefunc_failures     | 0     |</span><br><span class="line">| Rpl_semi_sync_master_tx_avg_wait_time      | 1095  |</span><br><span class="line">| Rpl_semi_sync_master_tx_wait_time          | 1095  |</span><br><span class="line">| Rpl_semi_sync_master_tx_waits              | 1     |</span><br><span class="line">| Rpl_semi_sync_master_wait_pos_backtraverse | 0     |</span><br><span class="line">| Rpl_semi_sync_master_wait_sessions         | 0     |</span><br><span class="line">| Rpl_semi_sync_master_yes_tx                | 1     |</span><br><span class="line">+--------------------------------------------+-------+</span><br><span class="line">14 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/15/001-mysql半同步模式建立/" data-id="cjdq1v0uc0000hgvrxvfmniqn" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-014-mysql一主多从-星型结构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/13/014-mysql一主多从-星型结构/" class="article-date">
+  <time datetime="2017-11-13T05:16:31.000Z" itemprop="datePublished">2017-11-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/13/014-mysql一主多从-星型结构/">mysql一主多从-星型结构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前面.说了最简单的mysql 主备方式的配置, 那就是简单的一主一从的配置.</p>
+<p>今天要说一下,一主多从的配置方式.</p>
+<p>一主多从又分为好几种配置, 根据拓扑的不同, 简单的分为 星型结构和链式结构.</p>
+<ul>
+<li>星型结构<ul>
+<li>配置主机,按照前面的方式</li>
+<li>配置第一台备机,按照前面的方式配置.</li>
+<li>配置第二胎备机,还按照前面的方式配置.</li>
+</ul>
+</li>
+</ul>
+<p>这里完全跟前面的配置一样, 可以看出,第一台备机和第二台备机的配置,完全没有差异.</p>
+<p>他们之间也不会互相影响.</p>
+<p>从主机上可以看出,复制关系仍然正常建立</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW PROCESSLIST;</span><br><span class="line">+----+------+------------------+------+-------------+-------+---------------------------------------------------------------+------------------+</span><br><span class="line">| Id | User | Host             | db   | Command     | Time  | State                                                         | Info             |</span><br><span class="line">+----+------+------------------+------+-------------+-------+---------------------------------------------------------------+------------------+</span><br><span class="line">|  4 | repl | 172.17.0.3:52312 | NULL | Binlog Dump | 52670 | Master has sent all binlog to slave; waiting <span class="keyword">for</span> more updates | NULL             |</span><br><span class="line">|  9 | repl | 172.17.0.4:44848 | NULL | Binlog Dump |   394 | Master has sent all binlog to slave; waiting <span class="keyword">for</span> more updates | NULL             |</span><br><span class="line">| 10 | root | localhost        | NULL | Query       |     0 | starting                                                      | SHOW PROCESSLIST |</span><br><span class="line">+----+------+------------------+------+-------------+-------+---------------------------------------------------------------+------------------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong>SHOW SLAVE HOSTS</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW SLAVE HOSTS;</span><br><span class="line">+-----------+------+-------+-----------+--------------------------------------+</span><br><span class="line">| Server_id | Host | Port  | Master_id | Slave_UUID                           |</span><br><span class="line">+-----------+------+-------+-----------+--------------------------------------+</span><br><span class="line">|         3 |      | 10000 |         1 | 1841a4b2-c834-11e7-99ee-0242ac110004 |</span><br><span class="line">|         2 |      | 10000 |         1 | 4d8df011-c7a4-11e7-bf90-0242ac110003 |</span><br><span class="line">+-----------+------+-------+-----------+--------------------------------------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/13/014-mysql一主多从-星型结构/" data-id="cjdq1v0uu000hhgvrzppnns3e" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-015-mysql主备复制关系建立" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/11/015-mysql主备复制关系建立/" class="article-date">
+  <time datetime="2017-11-11T12:22:52.000Z" itemprop="datePublished">2017-11-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/11/015-mysql主备复制关系建立/">mysql主备复制关系建立</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>mysql主备关系建立</p>
+<ul>
+<li><p>前提</p>
+<ul>
+<li><p>首先需要一个mysql主机环境</p>
+</li>
+<li><p>其次需要一个mysql备机环境</p>
+</li>
+<li><p>保证mysql主机环境和备机环境的网络相同</p>
+</li>
+<li><p>保证两个环境的serverid不一致, 要不然无法建立主备关系</p>
+<ul>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql1 环境</span><br><span class="line">mysql&gt; show variables like <span class="string">'server_id'</span>;</span><br><span class="line">+---------------+-------+</span><br><span class="line">| Variable_name | Value |</span><br><span class="line">+---------------+-------+</span><br><span class="line">| server_id     | 1     |</span><br><span class="line">+---------------+-------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql2环境</span><br><span class="line">mysql&gt; show variables like <span class="string">'server_id'</span>;</span><br><span class="line">+---------------+-------+</span><br><span class="line">| Variable_name | Value |</span><br><span class="line">+---------------+-------+</span><br><span class="line">| server_id     | 2     |</span><br><span class="line">+---------------+-------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2017/11/11/015-mysql主备复制关系建立/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/11/015-mysql主备复制关系建立/" data-id="cjdq1v0uy000qhgvrnh8cfpc4" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-012-mysql-几种启动和关闭方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/11/012-mysql-几种启动和关闭方式/" class="article-date">
+  <time datetime="2017-11-11T05:29:08.000Z" itemprop="datePublished">2017-11-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/11/012-mysql-几种启动和关闭方式/">mysql-几种启动和关闭方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mysql 的启动和关闭方式, 根据mysql安装的不同,有个几种不同的方式.</p>
+<ol>
+<li><p>mysql安装到了系统,提供GUI等方式, 例如mysql for macos的安装系统.</p>
+<p>这种方式情况下, 只需要在相应的服务里, 点击启动或或者关闭就好.</p>
+<p>这是最简单的一种.</p>
+</li>
+<li><p>mysql提供相应的启动和停止脚本并且已经集成到相应的系统服务中,只是这些服务,一般需要cli方式调用,并没有提供GUI的方式.  典型的比如, mysql for linux, 提供的 rpm或者deb安装包.</p>
+<p>在这些安装包后, mysql已经被加入到系统服务中, 我们可以通过以下命令用于启停mysql服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br><span class="line">service mysql stop</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/11/11/012-mysql-几种启动和关闭方式/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/11/012-mysql-几种启动和关闭方式/" data-id="cjdq1v0ut000ghgvrm4v70hkd" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-011-mysql-new-install-change-password" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/10/011-mysql-new-install-change-password/" class="article-date">
+  <time datetime="2017-11-10T14:42:57.000Z" itemprop="datePublished">2017-11-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/10/011-mysql-new-install-change-password/">mysql-new-install-change-password</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mysql 新安装成功后, 在初始化脚本中,他们会给你一个登陆localhost的root密码.</p>
+<p>但这个密码只能用于登陆, </p>
+<p>除了登陆的其他操作,mysql都会提示你做密码修改.</p>
+<p>如下所示:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show databases;</span><br><span class="line">ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.</span><br></pre></td></tr></table></figure>
+<p>mysql 修改密码, 详情参见文档: <a href="https://dev.mysql.com/doc/refman/5.7/en/resetting-permissions.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/resetting-permissions.html</a></p>
+<p>下面介绍一种我自己使用的方式, 这也是官方文档所推荐的方式.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER USER <span class="string">'root'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'root'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.02 sec)</span><br></pre></td></tr></table></figure>
+<p>可以看出,当密码修改后, root用户已经可以正常的操作mysql数据库了.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/10/011-mysql-new-install-change-password/" data-id="cjdq1v0uq000bhgvrg21nclgf" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-019-身体检查报告" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/08/019-身体检查报告/" class="article-date">
+  <time datetime="2017-11-08T13:57:15.000Z" itemprop="datePublished">2017-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/08/019-身体检查报告/">身体检查报告</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/08/019-身体检查报告/" data-id="cjdq1v0uz000thgvrj6vzzxzj" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/身体检查/">身体检查</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Précédent</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Suivant &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/16/004-hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/">035-如何引用定义不同类型转换时-会发生什么</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

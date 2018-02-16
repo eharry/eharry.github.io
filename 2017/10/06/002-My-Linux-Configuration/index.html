@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>My Linux Configuration | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="收集linux配置 screenrc bashrc vimrc (todo) ctags/cscope (todo)">
+<meta name="keywords" content="Linux,configuration">
+<meta property="og:type" content="article">
+<meta property="og:title" content="My Linux Configuration">
+<meta property="og:url" content="http://yoursite.com/2017/10/06/002-My-Linux-Configuration/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="收集linux配置 screenrc bashrc vimrc (todo) ctags/cscope (todo)">
+<meta property="og:updated_time" content="2018-02-16T14:45:57.534Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="My Linux Configuration">
+<meta name="twitter:description" content="收集linux配置 screenrc bashrc vimrc (todo) ctags/cscope (todo)">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-002-My-Linux-Configuration" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/06/002-My-Linux-Configuration/" class="article-date">
+  <time datetime="2017-10-06T08:20:01.000Z" itemprop="datePublished">2017-10-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      My Linux Configuration
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="收集linux配置"><a href="#收集linux配置" class="headerlink" title="收集linux配置"></a>收集linux配置</h3><ul>
+<li>screenrc</li>
+<li>bashrc</li>
+<li>vimrc (todo)</li>
+<li>ctags/cscope (todo)</li>
+</ul>
+<a id="more"></a>
+<h3 id="screenrc"><a href="#screenrc" class="headerlink" title="screenrc"></a>screenrc</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">caption always <span class="string">"%&#123;= kw&#125;%-w%&#123;= kG&#125;%&#123;+b&#125;[%n %t]%&#123;-b&#125;%&#123;= kw&#125;%+w %= %&#123;g&#125;%H%&#123;-&#125;"</span></span><br><span class="line">defscrollback 10000</span><br></pre></td></tr></table></figure>
+<h3 id="bashrc"><a href="#bashrc" class="headerlink" title="bashrc"></a>bashrc</h3><ul>
+<li>copy from <a href="http://blog.csdn.net/ly890700/article/details/52851974" target="_blank" rel="noopener">http://blog.csdn.net/ly890700/article/details/52851974</a></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">sh-3.2<span class="comment"># cat ~/.bashrc</span></span><br><span class="line"><span class="built_in">alias</span> wl=<span class="string">'ll | wc -l'</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">'ls -l'</span></span><br><span class="line"><span class="built_in">alias</span> lh=<span class="string">'ls -lh'</span></span><br><span class="line"><span class="built_in">alias</span> grep=<span class="string">'grep -i --color'</span> <span class="comment">#用颜色标识，更醒目；忽略大小写</span></span><br><span class="line"><span class="built_in">alias</span> vi=vim</span><br><span class="line"><span class="comment"># alias c='clear'  # 快速清屏</span></span><br><span class="line"><span class="comment"># alias p='pwd'</span></span><br><span class="line"><span class="comment"># 进入目录并列出文件，如 cdl ../conf.d/</span></span><br><span class="line"><span class="function"><span class="title">cdl</span></span>() &#123; <span class="built_in">cd</span> <span class="string">"<span class="variable">$@</span>"</span> &amp;&amp; <span class="built_in">pwd</span> ; ls -alF; &#125;</span><br><span class="line"><span class="built_in">alias</span> .1=<span class="string">"cdl .."</span></span><br><span class="line"><span class="built_in">alias</span> .2=<span class="string">"cd ../.."</span>   <span class="comment"># 快速进入上上层目录</span></span><br><span class="line"><span class="built_in">alias</span> .3=<span class="string">"cd ../../.."</span></span><br><span class="line"><span class="built_in">alias</span> .4=<span class="string">"cd ../../.."</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">cd</span>..=<span class="string">'cdl ..'</span></span><br><span class="line"><span class="comment"># alias cp="cp -iv"      # interactive, verbose</span></span><br><span class="line"><span class="comment"># alias rm="rm -i"      # interactive</span></span><br><span class="line"><span class="comment"># alias mv="mv -iv"       # interactive, verbose</span></span><br><span class="line"><span class="built_in">alias</span> psg=<span class="string">'\ps aux | grep -v grep | grep --color'</span> <span class="comment"># 查看进程信息</span></span><br><span class="line"><span class="built_in">alias</span> hg=<span class="string">'history|grep'</span></span><br><span class="line"><span class="built_in">alias</span> netp=<span class="string">'netstat -tulanp'</span>  <span class="comment"># 查看服务器端口连接信息</span></span><br><span class="line"><span class="built_in">alias</span> lvim=<span class="string">"vim -c \"normal '0\""</span>  <span class="comment"># 编辑vim最近打开的文件</span></span><br><span class="line"><span class="comment">#alias tf='tail -f '  # 快速查看文件末尾输出</span></span><br><span class="line"><span class="comment"># 自动在文件末尾加上 .bak-日期 来备份文件，如 bu nginx.conf</span></span><br><span class="line"><span class="function"><span class="title">bak</span></span>() &#123; cp <span class="string">"<span class="variable">$@</span>"</span> <span class="string">"<span class="variable">$@</span>.bak"</span>-`date +%y%m%d`; <span class="built_in">echo</span> <span class="string">"`date +%Y-%m-%d` backed up <span class="variable">$PWD</span>/<span class="variable">$@</span>"</span>; &#125;</span><br><span class="line"><span class="comment"># 级联创建目录并进入，如 mcd a/b/c</span></span><br><span class="line"><span class="function"><span class="title">mcd</span></span>() &#123; mkdir -p <span class="variable">$1</span> &amp;&amp; <span class="built_in">cd</span> <span class="variable">$1</span> &amp;&amp; <span class="built_in">pwd</span> ; &#125;</span><br><span class="line"><span class="comment"># 查看去掉#注释和空行的配置文件，如 nocomm /etc/squid/squid.conf</span></span><br><span class="line"><span class="built_in">alias</span> nocomm=<span class="string">'grep -Ev '</span>\<span class="string">''</span>^(<span class="comment">#|$)'\'''</span></span><br><span class="line"><span class="comment"># 快速根据进程号pid杀死进程，如 psid tomcat， 然后 kill9 两个tab键提示要kill的进程号</span></span><br><span class="line"><span class="built_in">alias</span> kill9=<span class="string">'kill -9'</span>;</span><br><span class="line"><span class="function"><span class="title">psid</span></span>() &#123;</span><br><span class="line">  [[ ! -n <span class="variable">$&#123;1&#125;</span> ]] &amp;&amp; <span class="built_in">return</span>;   <span class="comment"># bail if no argument</span></span><br><span class="line">  pro=<span class="string">"[<span class="variable">$&#123;1:0:1&#125;</span>]<span class="variable">$&#123;1:1&#125;</span>"</span>;      <span class="comment"># process-name –&gt; [p]rocess-name (makes grep better)</span></span><br><span class="line">  ps axo pid,user,<span class="built_in">command</span> | grep -v grep |grep -i --color <span class="variable">$&#123;pro&#125;</span>;   <span class="comment"># show matching processes</span></span><br><span class="line">  pids=<span class="string">"<span class="variable">$(ps axo pid,user,command | grep -v grep | grep -i $&#123;pro&#125; | awk '&#123;print $1&#125;')</span>"</span>;   <span class="comment"># get pids</span></span><br><span class="line">  complete -W <span class="string">"<span class="variable">$&#123;pids&#125;</span>"</span> kill9     <span class="comment"># make a completion list for kk</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 解压所有归档文件工具</span></span><br><span class="line"><span class="keyword">function</span> extract &#123;</span><br><span class="line"> <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$1</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># display usage if no parameters given</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage: extract &lt;path/file_name&gt;.&lt;zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz&gt;"</span></span><br><span class="line"> <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">if</span> [ -f <span class="variable">$1</span> ] ; <span class="keyword">then</span></span><br><span class="line">        <span class="comment"># NAME=$&#123;1%.*&#125;</span></span><br><span class="line">        <span class="comment"># mkdir $NAME &amp;&amp; cd $NAME</span></span><br><span class="line">        <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">          *.tar.bz2)   tar xvjf <span class="variable">$1</span>    ;;</span><br><span class="line">          *.tar.gz)    tar xvzf <span class="variable">$1</span>    ;;</span><br><span class="line">          *.tar.xz)    tar xvJf <span class="variable">$1</span>    ;;</span><br><span class="line">          *.lzma)      unlzma <span class="variable">$1</span>      ;;</span><br><span class="line">          *.bz2)       bunzip2 <span class="variable">$1</span>     ;;</span><br><span class="line">          *.rar)       unrar x -ad <span class="variable">$1</span> ;;</span><br><span class="line">          *.gz)        gunzip <span class="variable">$1</span>      ;;</span><br><span class="line">          *.tar)       tar xvf <span class="variable">$1</span>     ;;</span><br><span class="line">          *.tbz2)      tar xvjf <span class="variable">$1</span>    ;;</span><br><span class="line">          *.tgz)       tar xvzf <span class="variable">$1</span>    ;;</span><br><span class="line">          *.zip)       unzip <span class="variable">$1</span>       ;;</span><br><span class="line">          *.Z)         uncompress <span class="variable">$1</span>  ;;</span><br><span class="line">          *.7z)        7z x <span class="variable">$1</span>        ;;</span><br><span class="line">          *.xz)        unxz <span class="variable">$1</span>        ;;</span><br><span class="line">          *.exe)       cabextract <span class="variable">$1</span>  ;;</span><br><span class="line">          *)           <span class="built_in">echo</span> <span class="string">"extract: '<span class="variable">$1</span>' - unknown archive method"</span> ;;</span><br><span class="line">        <span class="keyword">esac</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$1</span> - file does not exist"</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 其它你自己的命令</span></span><br><span class="line"><span class="built_in">alias</span> nginxreload=<span class="string">'sudo /usr/local/nginx/sbin/nginx -s reload'</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/06/002-My-Linux-Configuration/" data-id="cjdq1v0ug0001hgvrvd50amdt" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/configuration/">configuration</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/06/007-macos-remove-jdk/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          macos remove jdk
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/16/004-hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/">035-如何引用定义不同类型转换时-会发生什么</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
