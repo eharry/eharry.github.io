@@ -5,14 +5,19 @@
   
 
   
-  <title>Hexo</title>
+  <title>036-c++代码如何使用nm得到可以合适的断点函数 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://eharry.github.io/index.html">
+  <meta name="description" content="通常对一个程序进行调试,我们都需要在函数处设置断点, 所以当打开gdb的时候,我们都需要一个函数名. 然后c++程序是有namespace和类的, 需要我们手动从代码里拼接函数名, 这样不仅繁琐,还容易出错. 这个时候可以使用nm这个工具,然后用grep搜索到我们需要的函数名. 例如: 12$ nm ./mongod | grep &quot;\&amp;lt;main\&amp;gt;&quot;0000000001f5e3d4">
+<meta name="keywords" content="nm, gdb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="036-c++代码如何使用nm得到可以合适的断点函数">
+<meta property="og:url" content="https://eharry.github.io/2018/02/17/036-c-代码如何使用nm得到可以合适的断点函数/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="通常对一个程序进行调试,我们都需要在函数处设置断点, 所以当打开gdb的时候,我们都需要一个函数名. 然后c++程序是有namespace和类的, 需要我们手动从代码里拼接函数名, 这样不仅繁琐,还容易出错. 这个时候可以使用nm这个工具,然后用grep搜索到我们需要的函数名. 例如: 12$ nm ./mongod | grep &quot;\&amp;lt;main\&amp;gt;&quot;0000000001f5e3d4">
+<meta property="og:updated_time" content="2018-02-18T01:17:25.630Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="036-c++代码如何使用nm得到可以合适的断点函数">
+<meta name="twitter:description" content="通常对一个程序进行调试,我们都需要在函数处设置断点, 所以当打开gdb的时候,我们都需要一个函数名. 然后c++程序是有namespace和类的, 需要我们手动从代码里拼接函数名, 这样不仅繁琐,还容易出错. 这个时候可以使用nm这个工具,然后用grep搜索到我们需要的函数名. 例如: 12$ nm ./mongod | grep &quot;\&amp;lt;main\&amp;gt;&quot;0000000001f5e3d4">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,9 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-036-c-代码如何使用nm得到可以合适的断点函数" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-036-c-代码如何使用nm得到可以合适的断点函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/02/17/036-c-代码如何使用nm得到可以合适的断点函数/" class="article-date">
   <time datetime="2018-02-17T00:35:32.000Z" itemprop="datePublished">2018-02-17</time>
@@ -74,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/17/036-c-代码如何使用nm得到可以合适的断点函数/">036-c++代码如何使用nm得到可以合适的断点函数</a>
+    <h1 class="article-title" itemprop="name">
+      036-c++代码如何使用nm得到可以合适的断点函数
     </h1>
   
 
@@ -108,390 +111,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-004-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/02/16/004-hello-world/" class="article-date">
-  <time datetime="2018-02-16T14:45:57.534Z" itemprop="datePublished">2018-02-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/16/004-hello-world/">Hello World</a>
-    </h1>
+    <a href="/2018/02/16/004-hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2018/02/16/004-hello-world/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2018/02/16/004-hello-world/" data-id="cjds3refp00032avrc2k91b9v" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/example/">example</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-035-如何引用定义不同类型转换时-会发生什么" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/" class="article-date">
-  <time datetime="2018-02-04T14:58:02.000Z" itemprop="datePublished">2018-02-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/">035-如何引用定义不同类型转换时-会发生什么</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我们知道, 变量可以使用不同类型进行初始化,那是因为中间有值copy.</p>
-<p>但是引用是否可以定义到不同类型呢?</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    double a = 3.14;</span><br><span class="line">    int &amp; b = a;</span><br><span class="line">    double &amp; c = a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2018/02/04/035-如何引用定义不同类型转换时-会发生什么/" data-id="cjds3reho001t2avri5zottl5" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-034-c-重载引用-右值引用的一些实验" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/" class="article-date">
-  <time datetime="2018-02-04T14:30:53.000Z" itemprop="datePublished">2018-02-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>老生常谈,自从知道C++有了引用和右值引用之后, 我就一直想知道如何来重载引用和右值引用,尤其是无法区分的情况下.</p>
-<p>所以有了今天以下的实验</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2018/02/04/034-c-重载引用-右值引用的一些实验/" data-id="cjds3rehk001n2avr0f331j6b" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-033-g-如何显示出编译的路径和引用的头文件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/" class="article-date">
-  <time datetime="2018-01-19T13:50:50.000Z" itemprop="datePublished">2018-01-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>c/c++ 头文件机制,实际上是一个很难懂的机制, 因为只定义了文件名,在大规模的程序开发中,难免会遇到同名的问题.</p>
-<p>然后这个时候,就会在编译脚本里引用各种各样的-I 选项,对预处理脚本进行微调,而这种关系往往都是隐蔽的和难以确认的,这导致后续程序护和开发都要精心维护这种特殊关系.</p>
-<p>那么如何查看当前的编译路径呢?</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -E -v -o</span><br></pre></td></tr></table></figure>
-<p>如何查看已经被引用的头文件的呢?</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -H -o</span><br></pre></td></tr></table></figure>
-<p>这两种方式可以很方便的查看当前c++的头文件引用关系.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/" data-id="cjds3rehn001s2avrfr2zi2nw" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-032-mongodb简单介绍学习" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/13/032-mongodb简单介绍学习/" class="article-date">
-  <time datetime="2018-01-13T04:42:09.000Z" itemprop="datePublished">2018-01-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2018/01/13/032-mongodb简单介绍学习/" data-id="cjds3rehj001l2avrgfskxqjh" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-031-如何显示scons的编译选项" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/07/031-如何显示scons的编译选项/" class="article-date">
-  <time datetime="2018-01-07T14:39:13.000Z" itemprop="datePublished">2018-01-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/07/031-如何显示scons的编译选项/">031-如何显示scons的编译选项</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>scons 在编译的时候, 会根据配置,将一些编译的具体语句省略掉.</p>
-<p>这个会导致当出现编译错误的时候,不知所措.</p>
-<p>使用  scons VERBOSE=1 选项可以解决这个问题</p>
-<p>​<br>​<br>​<br>​    </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2018/01/07/031-如何显示scons的编译选项/" data-id="cjds3rehn001r2avr4c9vc01k" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-030-mysql-internal-doc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/05/030-mysql-internal-doc/" class="article-date">
-  <time datetime="2018-01-05T05:52:37.000Z" itemprop="datePublished">2018-01-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/05/030-mysql-internal-doc/">030-mysql-internal-doc</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>mysql 官方的内部文档: <a href="https://dev.mysql.com/doc/internals/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/internals/en/</a></p>
-<p>这个文档是一个绝佳 的了解mysql内部代码结构的文档,尤其是第一章.通过简化的client server通讯描述,概要并完整的介绍了mysql的内部主要逻辑和相关代码.</p>
-<p>让人能从纷繁复杂的mysql代码中,迅速抓住主干.</p>
-<p>入门极好的材料.</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2018/01/05/030-mysql-internal-doc/" data-id="cjds3rehd001g2avr1aj1oxpi" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-027-mysql-innodb-01-笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/17/027-mysql-innodb-01-笔记/" class="article-date">
-  <time datetime="2017-12-17T10:55:21.000Z" itemprop="datePublished">2017-12-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/17/027-mysql-innodb-01-笔记/">027-mysql-innodb-01-笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/12/17/027-mysql-innodb-01-笔记/" data-id="cjds3rehh001j2avrsn4asdd6" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-026-git-介绍" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/16/026-git-介绍/" class="article-date">
-  <time datetime="2017-12-16T13:52:24.000Z" itemprop="datePublished">2017-12-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/16/026-git-介绍/">026-git-介绍</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>tig是一款cli方式交互式git项目的工具</li>
-<li>安装方式<ul>
-<li>brew install tig</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/12/16/026-git-介绍/" data-id="cjds3rehc001d2avrdrlw6fnp" class="article-share-link">Teilen</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
-  </nav>
 
 </section>
         

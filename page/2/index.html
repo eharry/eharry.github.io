@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://eharry.github.io"></form>
@@ -60,6 +60,65 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-025-ag-初步使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/16/025-ag-初步使用/" class="article-date">
+  <time datetime="2017-12-16T13:05:02.000Z" itemprop="datePublished">2017-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/16/025-ag-初步使用/">025-ag-初步使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>ag是什么?</p>
+<ul>
+<li>ag是一个搜索工具, 他比ack还要快, 当然比grep还要快很多.</li>
+<li>地址如下 <a href="https://github.com/ggreer/the_silver_searcher" target="_blank" rel="noopener">https://github.com/ggreer/the_silver_searcher</a></li>
+</ul>
+</li>
+<li><p>ag为什么这么快?</p>
+<ul>
+<li>Ag uses <a href="https://en.wikipedia.org/wiki/POSIX_Threads" target="_blank" rel="noopener">Pthreads</a> to take advantage of multiple CPU cores and search files in parallel.</li>
+<li>Files are <code>mmap()</code>ed instead of read into a buffer.</li>
+<li>Literal string searching uses <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string_search_algorithm" target="_blank" rel="noopener">Boyer-Moore strstr</a>.</li>
+<li>Regex searching uses <a href="http://sljit.sourceforge.net/pcre.html" target="_blank" rel="noopener">PCRE’s JIT compiler</a> (if Ag is built with PCRE &gt;=8.21).</li>
+<li>Ag calls <code>pcre_study()</code> before executing the same regex on every file.</li>
+<li>Instead of calling <code>fnmatch()</code> on every pattern in your ignore files, non-regex patterns are loaded into arrays and binary searched.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">总结起来就是: 使用了pthread, mmap, bm搜索, PCRE正则和有效兼容git仓库ignore文件的搜索方式.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2017/12/16/025-ag-初步使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://eharry.github.io/2017/12/16/025-ag-初步使用/" data-id="cjds3reh700182avr2983wgfk" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-024-mysql-join-初步试用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -98,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/12/07/024-mysql-join-初步试用/" data-id="cjdq214nc0013upvrfgwupkdf" class="article-share-link">Share</a>
+      <a data-url="https://eharry.github.io/2017/12/07/024-mysql-join-初步试用/" data-id="cjds3reh600162avr28x4k3ai" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -143,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/12/07/023-mysql-having-初步使用/" data-id="cjdq214na000zupvrai5zc9o1" class="article-share-link">Share</a>
+      <a data-url="https://eharry.github.io/2017/12/07/023-mysql-having-初步使用/" data-id="cjds3reha001b2avr4a3ckhwk" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -208,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/12/06/022-mysql-group-by应用于多个列/" data-id="cjdq214n9000xupvrpdvs8lai" class="article-share-link">Share</a>
+      <a data-url="https://eharry.github.io/2017/12/06/022-mysql-group-by应用于多个列/" data-id="cjds3reh400132avr6cdzj6wk" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -253,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/12/02/021-mysql-distinct只能应用于所有列/" data-id="cjdq214n7000tupvr6l1ofoi5" class="article-share-link">Share</a>
+      <a data-url="https://eharry.github.io/2017/12/02/021-mysql-distinct只能应用于所有列/" data-id="cjds3reh300112avr4f2vn50j" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
@@ -339,7 +398,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/11/15/001-mysql半同步模式建立/" data-id="cjdq214mj0000upvr6j01albs" class="article-share-link">Share</a>
+      <a data-url="https://eharry.github.io/2017/11/15/001-mysql半同步模式建立/" data-id="cjds3regn000m2avr06uhjtbs" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -392,7 +451,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/11/13/014-mysql一主多从-星型结构/" data-id="cjdq214n2000jupvrgp31llwp" class="article-share-link">Share</a>
+      <a data-url="https://eharry.github.io/2017/11/13/014-mysql一主多从-星型结构/" data-id="cjds3regv000o2avrlnth3rrp" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
@@ -458,7 +517,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/11/11/015-mysql主备复制关系建立/" data-id="cjdq214n5000qupvrn66mvylz" class="article-share-link">Share</a>
+      <a data-url="https://eharry.github.io/2017/11/11/015-mysql主备复制关系建立/" data-id="cjds3rehf001h2avr48l67sy3" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -507,7 +566,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/11/11/012-mysql-几种启动和关闭方式/" data-id="cjdq214n0000gupvr2ekaf2hj" class="article-share-link">Share</a>
+      <a data-url="https://eharry.github.io/2017/11/11/012-mysql-几种启动和关闭方式/" data-id="cjds3regl000l2avrks4btj1n" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
@@ -554,47 +613,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/11/10/011-mysql-new-install-change-password/" data-id="cjdq214mv0009upvrbw5l3uwa" class="article-share-link">Share</a>
+      <a data-url="https://eharry.github.io/2017/11/10/011-mysql-new-install-change-password/" data-id="cjds3regi000j2avrwvsld658" class="article-share-link">Teilen</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-019-身体检查报告" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/08/019-身体检查报告/" class="article-date">
-  <time datetime="2017-11-08T13:57:15.000Z" itemprop="datePublished">2017-11-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/08/019-身体检查报告/">身体检查报告</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2017/11/08/019-身体检查报告/" data-id="cjdq214n9000wupvrcy88i3tg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/身体检查/">身体检查</a></li></ul>
-
     </footer>
   </div>
   
@@ -606,7 +627,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">weiter &raquo;</a>
   </nav>
 
 </section>
@@ -620,7 +641,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nm-gdb/">nm, gdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
     </div>
   </div>
 
@@ -630,14 +651,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/nm-gdb/" style="font-size: 10px;">nm, gdb</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
     </div>
@@ -647,9 +668,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/02/17/036-c-代码如何使用nm得到可以合适的断点函数/">036-c++代码如何使用nm得到可以合适的断点函数</a>
+          </li>
         
           <li>
             <a href="/2018/02/16/004-hello-world/">Hello World</a>
@@ -665,10 +690,6 @@
         
           <li>
             <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/13/032-mongodb简单介绍学习/">032-mongodb简单介绍学习</a>
           </li>
         
       </ul>
