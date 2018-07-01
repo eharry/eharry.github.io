@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://eharry.github.io/2018/02/17/036-c-代码如何使用nm得到可以合适的断点函数/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="通常对一个程序进行调试,我们都需要在函数处设置断点, 所以当打开gdb的时候,我们都需要一个函数名. 然后c++程序是有namespace和类的, 需要我们手动从代码里拼接函数名, 这样不仅繁琐,还容易出错. 这个时候可以使用nm这个工具,然后用grep搜索到我们需要的函数名. 例如: 12$ nm ./mongod | grep &quot;\&amp;lt;main\&amp;gt;&quot;0000000001f5e3d4">
-<meta property="og:updated_time" content="2018-02-18T01:17:25.630Z">
+<meta property="og:updated_time" content="2018-02-18T01:20:27.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="036-c++代码如何使用nm得到可以合适的断点函数">
 <meta name="twitter:description" content="通常对一个程序进行调试,我们都需要在函数处设置断点, 所以当打开gdb的时候,我们都需要一个函数名. 然后c++程序是有namespace和类的, 需要我们手动从代码里拼接函数名, 这样不仅繁琐,还容易出错. 这个时候可以使用nm这个工具,然后用grep搜索到我们需要的函数名. 例如: 12$ nm ./mongod | grep &quot;\&amp;lt;main\&amp;gt;&quot;0000000001f5e3d4">
@@ -91,6 +91,7 @@
 <p>这个时候可以使用nm这个工具,然后用grep搜索到我们需要的函数名.</p>
 <p>例如:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nm ./mongod | grep <span class="string">"\&lt;main\&gt;"</span></span><br><span class="line">0000000001f5e3d4 T main</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>但是如果寻找一个比较复杂的函数,这个就不是人能理解的了,例如</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nm ./mongod | grep receivedQuery</span><br><span class="line">00000000023ac682 t _ZN5mongoL13receivedQueryEPNS_16OperationContextERKNS_15NamespaceStringERNS_6ClientERNS_10DbResponseERNS_7MessageE</span><br></pre></td></tr></table></figure>
 <p>这个函数名,完全不是我们人类能理解的函数, 自然也就无法确认,是否可以用这个函数当断点了.</p>
@@ -103,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://eharry.github.io/2018/02/17/036-c-代码如何使用nm得到可以合适的断点函数/" data-id="cjds3rehl001p2avrtuunegpu" class="article-share-link">Teilen</a>
+      <a data-url="https://eharry.github.io/2018/02/17/036-c-代码如何使用nm得到可以合适的断点函数/" data-id="cjj2ma2is001owfvr2l2ioy9a" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nm-gdb/">nm, gdb</a></li></ul>
@@ -113,6 +114,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2018/02/18/037-mongod简易流程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          037-mongod简易流程
+        
+      </div>
+    </a>
   
   
     <a href="/2018/02/16/004-hello-world/" id="article-nav-older" class="article-nav-link-wrap">
@@ -136,7 +146,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nm-gdb/">nm, gdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configuration/">configuration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/example/">example</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk9/">jdk9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jshell/">jshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macos/">macos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nm-gdb/">nm, gdb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scons-verbose-option/">scons, verbose, option</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/身体检查/">身体检查</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/雷蛇/">雷蛇</a></li></ul>
     </div>
   </div>
 
@@ -146,7 +156,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/nm-gdb/" style="font-size: 10px;">nm, gdb</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
+      <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/configuration/" style="font-size: 10px;">configuration</a> <a href="/tags/example/" style="font-size: 10px;">example</a> <a href="/tags/jdk/" style="font-size: 15px;">jdk</a> <a href="/tags/jdk9/" style="font-size: 10px;">jdk9</a> <a href="/tags/jshell/" style="font-size: 10px;">jshell</a> <a href="/tags/macos/" style="font-size: 15px;">macos</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb,</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/nm-gdb/" style="font-size: 10px;">nm, gdb</a> <a href="/tags/scons-verbose-option/" style="font-size: 10px;">scons, verbose, option</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/身体检查/" style="font-size: 10px;">身体检查</a> <a href="/tags/雷蛇/" style="font-size: 10px;">雷蛇</a>
     </div>
   </div>
 
@@ -168,6 +178,10 @@
       <ul>
         
           <li>
+            <a href="/2018/02/18/037-mongod简易流程/">037-mongod简易流程</a>
+          </li>
+        
+          <li>
             <a href="/2018/02/17/036-c-代码如何使用nm得到可以合适的断点函数/">036-c++代码如何使用nm得到可以合适的断点函数</a>
           </li>
         
@@ -181,10 +195,6 @@
         
           <li>
             <a href="/2018/02/04/034-c-重载引用-右值引用的一些实验/">034-c++重载引用-右值引用的一些实验</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/033-g-如何显示出编译的路径和引用的头文件/">033-g++如何显示出编译的路径和引用的头文件</a>
           </li>
         
       </ul>
